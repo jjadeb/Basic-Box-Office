@@ -43,12 +43,36 @@ public class ShowList {
                 }
             }
         }
+        for (Show show: pastShows) {
+            for (int showDate: show.getDates()) {
+                if (showDate == givenDate) {
+                    showsOnThisDate.add(show.getTitle());
+                }
+            }
+        }
         return showsOnThisDate;
+    }
+
+
+    public boolean isContainedInUpcoming(Show show) {
+        return upcomingShows.contains(show);
+    }
+
+    public boolean isContainedInPast(Show show) {
+        return pastShows.contains(show);
     }
 
 
     public ArrayList getUpcomingShows() {
         return upcomingShows;
+    }
+
+    public int getUpcomingShowsSize() {
+        return upcomingShows.size();
+    }
+
+    public int getPastShowsSize() {
+        return pastShows.size();
     }
 
     public ArrayList getPastShows() {

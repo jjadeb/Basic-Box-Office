@@ -14,6 +14,8 @@ public class Show {
 
     public Show() {
         patrons = new PatronList();
+        dates = new ArrayList<>();
+        title = "";
     }
 
     //MODIFIES: this
