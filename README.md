@@ -1,10 +1,10 @@
 # My Personal Project
 
-## A ticket buying system
+## A Ticket Selling System
 
 
 
-My goal is to create a simple ticket buying system for a small
+My goal is to create a simple ticket selling system for a small
 theatre company that does all their transactions via cash. In other 
 words, there won't be any money transaction built into the system.
 
@@ -13,7 +13,19 @@ customer profiles, sell them tickets to different shows, and add
 them to the list of patrons seeing the respective shows.
 
 This project is of interest to me because I **love** theatre and 
-would love a small taste of what it is like to create the systems
+I have worked in a theatre box office before. I would love a small
+taste of what it is like to create the systems
 that theatre companies use.
 
 
+## User Stories
+
+- As a user, I want to be able to add a customer profile
+- As a user, I want to be able to view all customer profiles
+- As a user, I want to be able to show a customer a list of
+upcoming shows
+- As a user, I want to be able to add a customer to the patron 
+list for a show
+- As a user, I want to be able to view the patron list for a show
+- As a user, I want to be able to show the customer what shows they
+have paid to see
