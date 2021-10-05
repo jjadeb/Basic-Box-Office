@@ -1,4 +1,7 @@
-package model;
+package model.Shows;
+
+import model.People.Patron;
+import model.People.PatronList;
 
 import java.util.ArrayList;
 

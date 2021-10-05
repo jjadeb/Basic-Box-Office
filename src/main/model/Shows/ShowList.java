@@ -1,4 +1,6 @@
-package model;
+package model.Shows;
+
+import model.Shows.Show;
 
 import java.util.ArrayList;
 

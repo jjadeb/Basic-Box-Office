@@ -1,11 +1,13 @@
-package model;
+package model.People;
+
+import model.People.Patron;
 
 import java.util.ArrayList;
 
 //Represents a list of the patrons that have accounts with the theatre
 public class PatronList {
 
-    ArrayList<Patron> patronList;
+    private ArrayList<Patron> patronList;
 
     public PatronList() {
         patronList = new ArrayList<>();
@@ -28,5 +30,13 @@ public class PatronList {
 
     public ArrayList<Patron> getPatronList() {
         return patronList;
+    }
+
+    public int size() {
+        return patronList.size();
+    }
+
+    public boolean contains(Patron patron) {
+        return patronList.contains(patron);
     }
 }
