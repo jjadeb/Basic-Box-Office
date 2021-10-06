@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Show {
 
     private String title;
-    private ArrayList<Integer> dates;
+    private ArrayList<String> dates;
     private PatronList patrons;
 
     public Show() {
@@ -33,12 +33,19 @@ public class Show {
     //REQUIRES: each date must be of the form MMDDYY
     //MODIFIES: this
     //EFFECTS: sets the dates of the show
-    public void setDates(ArrayList<Integer> dates) {
+    public void setDates(ArrayList<String> dates) {
         this.dates = dates;
     }
 
+    //REQUIRES: each date must be of the form MMDDYY
+    //MODIFIES: this
+    //EFFECTS: add a date to the show
+    public void addDate(String date) {
+        dates.add(date);
+    }
 
-    public ArrayList<Integer> getDates() {
+
+    public ArrayList<String> getDates() {
         return dates;
     }
 

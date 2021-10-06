@@ -33,17 +33,17 @@ public class ShowList {
 
     //REQUIRES: date must be in form MMDDYY
     //EFFECTS: provides a list of names of upcoming shows on the date provided, empty if none
-    public ArrayList<String> onThisDate(int givenDate) {
+    public ArrayList<String> onThisDate(String givenDate) {
         ArrayList<String> showsOnThisDate = new ArrayList<>();
         for (Show show: upcomingShows) {
-            for (int showDate: show.getDates()) {
+            for (String showDate: show.getDates()) {
                 if (showDate == givenDate) {
                     showsOnThisDate.add(show.getTitle());
                 }
             }
         }
         for (Show show: pastShows) {
-            for (int showDate: show.getDates()) {
+            for (String showDate: show.getDates()) {
                 if (showDate == givenDate) {
                     showsOnThisDate.add(show.getTitle());
                 }

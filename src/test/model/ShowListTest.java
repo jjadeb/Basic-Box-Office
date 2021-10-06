@@ -1,9 +1,8 @@
 package model;
 
-import model.People.Patron;
+
 import model.Shows.Show;
 import model.Shows.ShowList;
-import model.Theatre.Theatre;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -82,39 +81,36 @@ public class ShowListTest {
         singingInTheRain.setTitle("Singing in the Rain");
         cabaret.setTitle("Cabaret");
 
-        ArrayList<Integer> batbdates = new ArrayList();
-        batbdates.add(022120);
-        batbdates.add(022220);
-        batbdates.add(022320);
-        beautyAndTheBeast.setDates(batbdates);
 
-        ArrayList<Integer> sitrdates = new ArrayList();
-        sitrdates.add(022320);
-        sitrdates.add(022420);
-        sitrdates.add(022520);
-        singingInTheRain.setDates(sitrdates);
+        beautyAndTheBeast.addDate("022120");
+        beautyAndTheBeast.addDate("022220");
+        beautyAndTheBeast.addDate("022320");
 
-        ArrayList<Integer> cabdates = new ArrayList();
-        cabdates.add(021020);
-        cabdates.add(022020);
-        cabdates.add(022120);
-        cabaret.setDates(cabdates);
+
+        singingInTheRain.addDate("022320");
+        singingInTheRain.addDate("022420");
+        singingInTheRain.addDate("022520");
+
+
+        cabaret.addDate("021020");
+        cabaret.addDate("022020");
+        cabaret.addDate("022120");
 
         showList.archive(cabaret);
 
-        assertEquals(2, showList.onThisDate(022320).size());
-        assertEquals(2, showList.onThisDate(022120).size());
-        assertEquals(1, showList.onThisDate(022420).size());
-        assertEquals(1, showList.onThisDate(021020).size());
-        assertEquals(0, showList.onThisDate(020520).size());
+        assertEquals(2, showList.onThisDate("022320").size());
+        assertEquals(2, showList.onThisDate("022120").size());
+        assertEquals(1, showList.onThisDate("022420").size());
+        assertEquals(1, showList.onThisDate("021020").size());
+        assertEquals(0, showList.onThisDate("020520").size());
 
-        assertTrue(showList.onThisDate(022320).contains("Singing in the Rain"));
-        assertTrue(showList.onThisDate(022320).contains("Beauty and the Beast"));
-        assertTrue(showList.onThisDate(022120).contains("Beauty and the Beast"));
-        assertTrue(showList.onThisDate(022120).contains("Cabaret"));
-        assertTrue(showList.onThisDate(022420).contains("Singing in the Rain"));
-        assertTrue(showList.onThisDate(021020).contains("Cabaret"));
-        assertTrue(showList.onThisDate(020520).isEmpty());
+        assertTrue(showList.onThisDate("022320").contains("Singing in the Rain"));
+        assertTrue(showList.onThisDate("022320").contains("Beauty and the Beast"));
+        assertTrue(showList.onThisDate("022120").contains("Beauty and the Beast"));
+        assertTrue(showList.onThisDate("022120").contains("Cabaret"));
+        assertTrue(showList.onThisDate("022420").contains("Singing in the Rain"));
+        assertTrue(showList.onThisDate("021020").contains("Cabaret"));
+        assertTrue(showList.onThisDate("020520").isEmpty());
 
 
 
