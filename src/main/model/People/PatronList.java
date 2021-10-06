@@ -1,6 +1,5 @@
 package model.People;
 
-import model.People.Patron;
 
 import java.util.ArrayList;
 

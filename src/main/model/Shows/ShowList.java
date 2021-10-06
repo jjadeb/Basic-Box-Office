@@ -1,6 +1,5 @@
 package model.Shows;
 
-import model.Shows.Show;
 
 import java.util.ArrayList;
 
@@ -65,7 +64,7 @@ public class ShowList {
     }
 
 
-    public ArrayList getUpcomingShows() {
+    public ArrayList<Show> getUpcomingShows() {
         return upcomingShows;
     }
 
@@ -79,7 +78,7 @@ public class ShowList {
         return pastShows.size();
     }
 
-    public ArrayList getPastShows() {
+    public ArrayList<Show> getPastShows() {
         return pastShows;
     }
 

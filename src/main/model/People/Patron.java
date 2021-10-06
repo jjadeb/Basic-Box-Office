@@ -1,9 +1,7 @@
 package model.People;
 
-import java.util.ArrayList;
 
 import model.Shows.Show;
-import model.Theatre.Theatre;
 
 import model.Shows.ShowList;
 
@@ -17,7 +15,7 @@ public class Patron {
     public Patron() {
         myShows = new ShowList();
         name = "";
-        birthday = 000000;
+        birthday = 111111;
 
 
     }
