@@ -4,7 +4,7 @@ import model.Shows.Show;
 
 import java.util.ArrayList;
 
-// Represents a record of upcoming shows and of past shows
+// Represents a record of a patron's or theatre's upcoming shows and past shows
 public class ShowList {
     private ArrayList<Show> upcomingShows;
     private ArrayList<Show> pastShows;
@@ -24,8 +24,8 @@ public class ShowList {
     }
 
 
-    //REQUIRES: show must be in upcomingShow lists
-    //MODIFIES: this and pastShows
+    //REQUIRES: show must not already be in the pastShow list
+    //MODIFIES: this
     //EFFECTS: removes a show from upcoming shows and adds it to past shows
     public void archive(Show show) {
         upcomingShows.remove(show);
@@ -54,10 +54,12 @@ public class ShowList {
     }
 
 
+    //EFFECTS: checks to see if a show is in the upcoming show list
     public boolean isContainedInUpcoming(Show show) {
         return upcomingShows.contains(show);
     }
 
+    //EFFECTS: checks to see if a show is in the past show list
     public boolean isContainedInPast(Show show) {
         return pastShows.contains(show);
     }
@@ -67,10 +69,12 @@ public class ShowList {
         return upcomingShows;
     }
 
+    //EFFECT: returns the size of the upcoming show list
     public int getUpcomingShowsSize() {
         return upcomingShows.size();
     }
 
+    //EFFECT: returns the size of the past show list
     public int getPastShowsSize() {
         return pastShows.size();
     }
@@ -78,4 +82,5 @@ public class ShowList {
     public ArrayList getPastShows() {
         return pastShows;
     }
+
 }

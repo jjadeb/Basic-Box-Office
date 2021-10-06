@@ -29,6 +29,12 @@ public class TheatreTest {
     }
 
     @Test
+    public void namingTest() {
+        massey.setName("Massey Theatre");
+        assertEquals("Massey Theatre", massey.getName());
+    }
+
+    @Test
     public void addNewShowTest() {
         massey.addNewShow(cabaret);
         massey.addNewShow(legallyBlonde);

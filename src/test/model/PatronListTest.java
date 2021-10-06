@@ -5,8 +5,6 @@ import model.People.PatronList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -32,7 +30,10 @@ public class PatronListTest {
 
         assertTrue(listOfPatrons.contains(bob));
         assertTrue(listOfPatrons.contains(shirley));
-        assertEquals(2, listOfPatrons.size());
+        assertEquals(2, listOfPatrons.getSize());
+
+        assertTrue(listOfPatrons.getPatronList().contains(bob));
+        assertTrue(listOfPatrons.getPatronList().contains(shirley));
     }
 
     @Test
@@ -42,7 +43,9 @@ public class PatronListTest {
         listOfPatrons.addNewPatron(bob);
 
         assertTrue(listOfPatrons.contains(bob));
-        assertEquals(1, listOfPatrons.size());
+        assertEquals(1, listOfPatrons.getSize());
+
+        assertTrue(listOfPatrons.getPatronList().contains(bob));
 
 
     }

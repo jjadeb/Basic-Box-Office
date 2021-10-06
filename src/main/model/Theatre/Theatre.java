@@ -5,9 +5,7 @@ import model.People.PatronList;
 import model.Shows.Show;
 import model.Shows.ShowList;
 
-import java.util.ArrayList;
-
-//Represents a theatre
+//Represents a theatre that hosts shows
 public class Theatre {
 
 
@@ -38,7 +36,7 @@ public class Theatre {
         shows.addNewShow(show);
     }
 
-    //REQUIRES: Show must be in upcoming show list
+    //REQUIRES: Show must not be in the past show list
     //MODIFIES: this
     //EFFECTS: Moves a show from the upcoming show list to the past show list
     public void archiveShow(Show show) {
@@ -65,7 +63,7 @@ public class Theatre {
 
     //EFFECTS: Returns the size of the patron list
     public int patronSize() {
-        return patrons.size();
+        return patrons.getSize();
     }
 
     //EFFECTS: Checks to see if a show is in the upcoming show list

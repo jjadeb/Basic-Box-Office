@@ -5,7 +5,7 @@ import model.People.PatronList;
 
 import java.util.ArrayList;
 
-// Represents a theatre show
+// Represents a show that a theatre hosts and that patrons buy tickets for
 public class Show {
 
     private String title;
@@ -53,6 +53,6 @@ public class Show {
 
     //EFFECTS: Returns the size of the patron list
     public int patronSize() {
-        return patrons.size();
+        return patrons.getSize();
     }
 }

@@ -4,7 +4,7 @@ import model.People.Patron;
 
 import java.util.ArrayList;
 
-//Represents a list of the patrons that have accounts with the theatre
+//Represents a list of patrons
 public class PatronList {
 
     private ArrayList<Patron> patronList;
@@ -14,16 +14,15 @@ public class PatronList {
     }
 
     //MODIFIES this
-    //EFFECTS: Adds a new patron to the list of patrons
+    //EFFECTS: adds a new patron to the list of patrons
     public void addNewPatron(Patron patron) {
         if (!patronList.contains(patron)) {
             patronList.add(patron);
         }
     }
 
-    //REQUIRES: Patron be in the list of patrons
     //MODIFIES: this
-    //EFFECTS: Removes a new patron from the list of patrons
+    //EFFECTS: removes a new patron from the list of patrons
     public void removePatron(Patron patron) {
         patronList.remove(patron);
     }
@@ -32,10 +31,12 @@ public class PatronList {
         return patronList;
     }
 
-    public int size() {
+    //EFFECTS: returns the size of the patron list
+    public int getSize() {
         return patronList.size();
     }
 
+    //EFFECTS: checks to see if the patron list contains a patron
     public boolean contains(Patron patron) {
         return patronList.contains(patron);
     }
