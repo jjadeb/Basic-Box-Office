@@ -5,7 +5,7 @@ import model.People.PatronList;
 
 import java.util.ArrayList;
 
-// Represents a show that the theatre has booked
+// Represents a theatre show
 public class Show {
 
     private String title;
@@ -19,9 +19,11 @@ public class Show {
     }
 
     //MODIFIES: this
-    //EFFECTS: adds a patron to the list of people with tickets to the show
+    //EFFECTS: adds a patron to the list of people with tickets to the show (if not already there)
     public void addPatron(Patron patron) {
-        patrons.addNewPatron(patron);
+        if (!patrons.contains(patron)) {
+            patrons.addNewPatron(patron);
+        }
     }
 
     public void setTitle(String title) {
@@ -44,7 +46,13 @@ public class Show {
         return title;
     }
 
-    public PatronList getPatrons() {
-        return patrons;
+    //EFFECTS: Checks to see if a patron is in the patron list
+    public boolean isContainsPatron(Patron patron) {
+        return patrons.contains(patron);
+    }
+
+    //EFFECTS: Returns the size of the patron list
+    public int patronSize() {
+        return patrons.size();
     }
 }

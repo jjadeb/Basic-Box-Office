@@ -24,7 +24,7 @@ public class ShowList {
     }
 
 
-    //REQUIRES: only to be used on upcomingShow lists
+    //REQUIRES: show must be in upcomingShow lists
     //MODIFIES: this and pastShows
     //EFFECTS: removes a show from upcoming shows and adds it to past shows
     public void archive(Show show) {
