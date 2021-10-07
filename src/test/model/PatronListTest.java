@@ -1,7 +1,7 @@
 package model;
 
-import model.People.Patron;
-import model.People.PatronList;
+import model.people.Patron;
+import model.people.PatronList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

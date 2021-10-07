@@ -1,11 +1,9 @@
 package ui;
 
-import model.People.Patron;
-import model.Shows.Show;
-import model.Shows.ShowList;
-import model.Theatre.Theatre;
+import model.people.Patron;
+import model.shows.Show;
+import model.theatre.Theatre;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
@@ -17,7 +15,7 @@ public class BoxOffice {
 
     public BoxOffice() {
         scanner = new Scanner(System.in);
-        if (theatre.getName() == "") {
+        if (theatre.getName().equals("")) {
             setUp();
         }
         System.out.println("Would you like to complete any further actions? If not, type 'quit'.");
@@ -152,8 +150,11 @@ public class BoxOffice {
                         + " dollars. Will the patron buy it? yes/no");
                 if (scanner.nextLine().equals("yes")) {
                     patron.addShow(show);
+                    show.addPatron(patron);
                     System.out.println(patron.getName() + "'s purchase of a(n) " + show.getTitle()
                             + " ticket was successfully recorded!");
+                    System.out.println("Here is a list of " + patron.getName() + "'s upcoming shows:");
+                    System.out.println(patron.myUpcomingShowNames());
                 }
             }
         }
@@ -161,11 +162,8 @@ public class BoxOffice {
         String temp2 = scanner.nextLine();
         if (temp2.equals("yes")) {
             sellTicket(patron);
-        } else  {
-            System.out.println("That's plenty for today!");
         }
-        System.out.println("Here is a list of " + patron.getName() + "'s upcoming shows:");
-        System.out.println(patron.myUpcomingShowNames());
+
 
 
 

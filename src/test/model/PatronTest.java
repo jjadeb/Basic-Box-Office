@@ -1,8 +1,8 @@
 package model;
 
-import model.People.Patron;
-import model.Shows.Show;
-import model.Theatre.Theatre;
+import model.people.Patron;
+import model.shows.Show;
+import model.theatre.Theatre;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

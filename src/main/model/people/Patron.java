@@ -1,15 +1,15 @@
-package model.People;
+package model.people;
 
 
-import model.Shows.Show;
+import model.shows.Show;
 
-import model.Shows.ShowList;
+import model.shows.ShowList;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 //Represent a theatre patron that has signed up for an account with the theatre
-public class Patron implements Iterable<Show> {
+public class Patron {
 
     String name;
     int birthday;
@@ -79,15 +79,15 @@ public class Patron implements Iterable<Show> {
 
     public ArrayList<String> myUpcomingShowNames() {
         ArrayList<String> myShowNames = new ArrayList<>();
-        for (Show show: myShows.getUpcomingShows()) {
+        for (Show show : myShows.getUpcomingShows()) {
             myShowNames.add(show.getTitle());
         }
         return myShowNames;
     }
 
-
-    @Override
-    public Iterator<Show> iterator() {
-        return myShows.getUpcomingShows().iterator();
-    }
 }
+//    @Override
+//    public Iterator<Show> iterator() {
+//        return myShows.getUpcomingShows().iterator();
+//    }
+//}

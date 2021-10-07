@@ -1,4 +1,4 @@
-package model.Shows;
+package model.shows;
 
 
 import java.util.ArrayList;

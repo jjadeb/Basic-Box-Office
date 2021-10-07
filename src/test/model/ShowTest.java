@@ -1,8 +1,7 @@
 package model;
 
-import model.People.Patron;
-import model.Shows.Show;
-import model.Shows.ShowList;
+import model.people.Patron;
+import model.shows.Show;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -51,5 +50,11 @@ public class ShowTest {
         assertEquals(2,beautyAndTheBeast.patronSize());
         assertTrue(beautyAndTheBeast.isContainsPatron(bob));
         assertTrue(beautyAndTheBeast.isContainsPatron(shirley));
+    }
+
+    @Test
+    public void getAndSetPrice() {
+        beautyAndTheBeast.setTicketPrice(15);
+        assertEquals(15, beautyAndTheBeast.getTicketPrice());
     }
 }

@@ -1,7 +1,6 @@
-package model.Interfaces;
+package model.interfaces;
 
-import model.People.Patron;
-import model.Shows.Show;
+import model.shows.Show;
 
 import java.util.Iterator;
 
