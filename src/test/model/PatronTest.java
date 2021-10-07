@@ -22,6 +22,8 @@ class PatronTest {
         bob = new Patron();
         cabaret = new Show();
         crazyForYou = new Show();
+        cabaret.setTitle("Cabaret");
+        crazyForYou.setTitle("Crazy For You");
     }
 
     @Test
@@ -39,7 +41,7 @@ class PatronTest {
         bob.addShow(crazyForYou);
         bob.addShow(cabaret);
 
-        assertEquals(2, bob.myUpcomingShowSize());
+        assertEquals(3, bob.myUpcomingShowSize());
         assertTrue(bob.isContainedInMyUpcomingShows(cabaret));
         assertTrue(bob.isContainedInMyUpcomingShows(crazyForYou));
 
@@ -51,15 +53,27 @@ class PatronTest {
         bob.addShow(crazyForYou);
         bob.addShow(cabaret);
 
-        bob.removeShow(crazyForYou);
+        bob.removeShow(cabaret);
+        bob.removeShow(cabaret);
 
         assertEquals(1, bob.myUpcomingShowSize());
-        assertEquals(1, bob.myPastShowSize());
-        assertTrue(bob.isContainedInMyUpcomingShows(cabaret));
-        assertFalse(bob.isContainedInMyUpcomingShows(crazyForYou));
-        assertTrue(bob.isContainedInMyPastShows(crazyForYou));
+        assertEquals(2, bob.myPastShowSize());
+        assertFalse(bob.isContainedInMyUpcomingShows(cabaret));
+        assertTrue(bob.isContainedInMyUpcomingShows(crazyForYou));
+        assertTrue(bob.isContainedInMyPastShows(cabaret));
+        assertTrue(bob.getMyShows().isContainedInPast(cabaret));
 
-        assertTrue(bob.getMyShows().isContainedInUpcoming(cabaret));
+    }
+
+    @Test
+    public void myUpcomingShowNamesTest() {
+        assertTrue(bob.myUpcomingShowNames().isEmpty());
+
+        bob.addShow(cabaret);
+        bob.addShow(crazyForYou);
+
+        assertTrue(bob.myUpcomingShowNames().contains("Cabaret"));
+        assertTrue(bob.myUpcomingShowNames().contains("Crazy For You"));
 
     }
 

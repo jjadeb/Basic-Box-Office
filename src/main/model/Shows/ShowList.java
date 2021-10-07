@@ -15,11 +15,9 @@ public class ShowList {
     }
 
     //MODIFIES: this
-    //EFFECTS: adds a show to the list of upcoming shows if not already there
+    //EFFECTS: adds a show to the list of upcoming shows; can add multiple times to represent multiple tickets
     public void addNewShow(Show show) {
-        if (!upcomingShows.contains(show)) {
-            upcomingShows.add(show);
-        }
+        upcomingShows.add(show);
     }
 
 
@@ -64,8 +62,12 @@ public class ShowList {
     }
 
 
-    public ArrayList<Show> getUpcomingShows() {
-        return upcomingShows;
+    public ArrayList<String> getUpcomingShowNames() {
+        ArrayList<String> temp = new ArrayList<>();
+        for (Show show: upcomingShows) {
+            temp.add(show.getTitle());
+        }
+        return temp;
     }
 
     //EFFECT: returns the size of the upcoming show list
@@ -80,6 +82,10 @@ public class ShowList {
 
     public ArrayList<Show> getPastShows() {
         return pastShows;
+    }
+
+    public ArrayList<Show> getUpcomingShows() {
+        return upcomingShows;
     }
 
 }

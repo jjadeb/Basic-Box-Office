@@ -1,12 +1,17 @@
 package model.Theatre;
 
+import model.Interfaces.PatronIterator;
+import model.Interfaces.ShowIterator;
 import model.People.Patron;
 import model.People.PatronList;
 import model.Shows.Show;
 import model.Shows.ShowList;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 //Represents a theatre that hosts shows
-public class Theatre {
+public class Theatre implements PatronIterator, ShowIterator {
 
 
     String name;
@@ -86,4 +91,35 @@ public class Theatre {
         return shows.getPastShowsSize();
     }
 
+    //EFFECTS: Returns the names of upcoming shows
+    public ArrayList<String> getUpcomingShowNames() {
+        return shows.getUpcomingShowNames();
+    }
+
+    //EFFECTS: Returns  upcoming shows
+    public ArrayList<Show> getUpcomingShows() {
+        return shows.getUpcomingShows();
+    }
+
+    //EFFECTS: Retrieves patron from theatre list
+    public Patron getPatron(String name, Integer birthday) {
+        Patron find = null;
+        for (Patron patron: patrons.getPatronList()) {
+            if (patron.getName().equals(name) && (patron.getBirthday() == birthday)) {
+                find = patron;
+            }
+        }
+        return find;
+    }
+
+
+    @Override
+    public Iterator<Show> showIterator() {
+        return shows.getUpcomingShows().iterator();
+    }
+
+    @Override
+    public Iterator<Patron> patronIterator() {
+        return patrons.getPatronList().iterator();
+    }
 }

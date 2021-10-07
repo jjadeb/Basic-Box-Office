@@ -9,11 +9,11 @@ theatre company that does all their transactions via cash. In other
 words, there won't be any money transaction built into the system.
 
 In this program, ticket sellers will be able to create 
-customer profiles, sell them tickets to different shows, and add 
+customer profiles, "sell" them tickets to different shows, and add 
 them to the list of patrons seeing the respective shows.
 
 This project is of interest to me because I **love** theatre and 
-I have worked in a theatre box office before. I would love a small
+I have worked in a theatre box office for a couple years. I would love a small
 taste of what it is like to create the systems
 that theatre companies use.
 

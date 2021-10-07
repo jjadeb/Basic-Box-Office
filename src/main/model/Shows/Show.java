@@ -11,11 +11,14 @@ public class Show {
     private String title;
     private ArrayList<String> dates;
     private PatronList patrons;
+    private int ticketPrice;
+
 
     public Show() {
         patrons = new PatronList();
         dates = new ArrayList<>();
         title = "";
+        ticketPrice = 0;
     }
 
     //MODIFIES: this
@@ -30,12 +33,6 @@ public class Show {
         this.title = title;
     }
 
-    //REQUIRES: each date must be of the form MMDDYY
-    //MODIFIES: this
-    //EFFECTS: sets the dates of the show
-    public void setDates(ArrayList<String> dates) {
-        this.dates = dates;
-    }
 
     //REQUIRES: each date must be of the form MMDDYY
     //MODIFIES: this
@@ -61,5 +58,13 @@ public class Show {
     //EFFECTS: Returns the size of the patron list
     public int patronSize() {
         return patrons.getSize();
+    }
+
+    public int getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice(int ticketPrice) {
+        this.ticketPrice = ticketPrice;
     }
 }

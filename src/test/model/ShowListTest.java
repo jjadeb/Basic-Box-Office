@@ -27,6 +27,8 @@ public class ShowListTest {
         beautyAndTheBeast = new Show();
         singingInTheRain = new Show();
         cabaret = new Show();
+        cabaret.setTitle("Cabaret");
+        beautyAndTheBeast.setTitle("Beauty and the Beast");
 
         showList.addNewShow(beautyAndTheBeast);
         showList.addNewShow(singingInTheRain);
@@ -47,7 +49,7 @@ public class ShowListTest {
 
     public void addShowTwiceTest() {
         showList.addNewShow(beautyAndTheBeast);
-        assertEquals(3, showList.getUpcomingShowsSize());
+        assertEquals(4, showList.getUpcomingShowsSize());
         assertEquals(0, showList.getPastShowsSize());
         assertTrue(showList.isContainedInUpcoming(beautyAndTheBeast));
         assertTrue(showList.isContainedInUpcoming(cabaret));
@@ -115,5 +117,19 @@ public class ShowListTest {
 
 
 
+    }
+
+
+    @Test
+    public void myUpcomingShowNamesTest() {
+
+        assertTrue(showList.getUpcomingShowNames().contains("Cabaret"));
+        assertTrue(showList.getUpcomingShowNames().contains("Beauty and the Beast"));
+
+        showList.archive(beautyAndTheBeast);
+        showList.archive(cabaret);
+        showList.archive(singingInTheRain);
+
+        assertTrue(showList.getUpcomingShowNames().isEmpty());
     }
 }

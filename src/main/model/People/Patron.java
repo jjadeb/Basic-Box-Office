@@ -5,8 +5,11 @@ import model.Shows.Show;
 
 import model.Shows.ShowList;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 //Represent a theatre patron that has signed up for an account with the theatre
-public class Patron {
+public class Patron implements Iterable<Show> {
 
     String name;
     int birthday;
@@ -74,5 +77,17 @@ public class Patron {
         return myShows;
     }
 
+    public ArrayList<String> myUpcomingShowNames() {
+        ArrayList<String> myShowNames = new ArrayList<>();
+        for (Show show: myShows.getUpcomingShows()) {
+            myShowNames.add(show.getTitle());
+        }
+        return myShowNames;
+    }
 
+
+    @Override
+    public Iterator<Show> iterator() {
+        return myShows.getUpcomingShows().iterator();
+    }
 }
