@@ -131,6 +131,20 @@ public class ShowListTest {
         assertTrue(showList.getUpcomingShowNames().isEmpty());
     }
 
+    @Test
+    public void myPastShowNamesTest() {
+
+        assertTrue(showList.getPastShowNames().isEmpty());
+
+        showList.archive(beautyAndTheBeast);
+        showList.archive(cabaret);
+        showList.archive(singingInTheRain);
+
+        assertTrue(showList.getPastShowNames().contains("Cabaret"));
+        assertTrue(showList.getPastShowNames().contains("Beauty and the Beast"));
+
+    }
+
 
     @Test
     public void getShowTest() {

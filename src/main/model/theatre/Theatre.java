@@ -6,6 +6,7 @@ import model.shows.Show;
 import model.shows.ShowList;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 //Represents a theatre that hosts shows
 public class Theatre {
@@ -93,6 +94,11 @@ public class Theatre {
         return shows.getUpcomingShowNames();
     }
 
+    //EFFECTS: Returns the names of upcoming shows
+    public ArrayList<String> getPastShowNames() {
+        return shows.getPastShowNames();
+    }
+
     //EFFECTS: Returns  upcoming shows
     public ArrayList<Show> getUpcomingShows() {
         return shows.getUpcomingShows();
@@ -107,6 +113,15 @@ public class Theatre {
             }
         }
         return find;
+    }
+
+    public ArrayList<String> getPatronNames() {
+        ArrayList<String> patronNames = new ArrayList<>();
+        for (Patron patron : patrons.getPatronList()) {
+            String name = patron.getName();
+            patronNames.add(name);
+        }
+        return patronNames;
     }
 
     //EFFECTS: Return the show of a give show name

@@ -62,9 +62,19 @@ public class ShowList {
     }
 
 
+    //EFFECTS: returns names of upcoming shows
     public ArrayList<String> getUpcomingShowNames() {
         ArrayList<String> temp = new ArrayList<>();
         for (Show show : upcomingShows) {
+            temp.add(show.getTitle());
+        }
+        return temp;
+    }
+
+    //EFFECTS: returns names of past shows
+    public ArrayList<String> getPastShowNames() {
+        ArrayList<String> temp = new ArrayList<>();
+        for (Show show : pastShows) {
             temp.add(show.getTitle());
         }
         return temp;

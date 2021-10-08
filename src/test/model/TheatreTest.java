@@ -28,6 +28,8 @@ public class TheatreTest {
         legallyBlonde.setTitle("Legally Blonde");
         bob = new Patron();
         shirley = new Patron();
+        bob.setName("Bob");
+        shirley.setName("Shirley");
 
     }
 
@@ -105,6 +107,25 @@ public class TheatreTest {
     }
 
     @Test
+    public void myPastShowNamesTest() {
+
+        assertTrue(massey.getPastShowNames().isEmpty());
+
+        massey.addNewShow(cabaret);
+        massey.addNewShow(legallyBlonde);
+
+        assertTrue(massey.getPastShowNames().isEmpty());
+
+        massey.archiveShow(cabaret);
+        massey.archiveShow(legallyBlonde);
+
+        assertTrue(massey.getPastShowNames().contains("Cabaret"));
+        assertTrue(massey.getPastShowNames().contains("Legally Blonde"));
+
+
+    }
+
+    @Test
     public void getPatronTestTrue() {
 
         massey.addNewPatron(bob);
@@ -173,5 +194,15 @@ public class TheatreTest {
 
         assertEquals(legallyBlonde, massey.getShow("Legally Blonde"));
         assertEquals(cabaret, massey.getShow("Cabaret"));
+    }
+
+    @Test
+    public void getPatronNamesTest() {
+        massey.addNewPatron(bob);
+        massey.addNewPatron(shirley);
+
+        assertEquals(2, massey.getPatronNames().size());
+        assertTrue(massey.getPatronNames().contains("Bob"));
+        assertTrue(massey.getPatronNames().contains("Shirley"));
     }
 }

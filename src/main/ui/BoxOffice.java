@@ -74,15 +74,61 @@ public class BoxOffice {
     }
 
     //MODIFIES: Theatre
-    //EFFECTS: Changes or retrieves different information relating to the theatre
+    //EFFECTS: lets user choose whether they want to view or change information
     public void theatreInformation() {
         System.out.println("Would you like to (1) view theatre information, (2) modify theatre information, "
                 + "or (3) go back to the main menu?");
+        String temp = scanner.nextLine(); //simp calc code
+        if (temp.equals("1")) {
+            theatreInfoViewing();
+        } else if (temp.equals("2")) {
+           // theatreInfoModifying();
+        } else if (temp.equals("3")) {
+            mainMenu();
+        } else {
+            System.out.println("That wasn't one of the options. Let's try again.");
+            theatreInformation();
+        }
+    }
+
+    //EFFECTS: lets user view theatre information
+    public void theatreInfoViewing() {
+        System.out.println("What theatre information would you like to view?");
+        System.out.println("(1) upcoming theatre shows, (2) past theatre shows, (3) theatre patrons, "
+                + "(4) theatre name, (5) specific show information, (6) go to main menu");
+        String temp = scanner.nextLine();
+        if (temp.equals("1")) {
+            System.out.println("Here are the upcoming theatre shows: " + theatre.getUpcomingShowNames());
+        } else if (temp.equals("2")) {
+            System.out.println("Here are the past shows: " + theatre.getPastShowNames());
+        } else if (temp.equals("3")) {
+            System.out.println("Here are the theatre patrons: " + theatre.getPatronNames());
+        } else if (temp.equals("4")) {
+            System.out.println("Here is the theatre name: " + (theatre.getName()));
+        } else if (temp.equals("5")) {
+            specificShowInfo();
+        } else if (temp.equals("6")) {
+            mainMenu();
+        } else {
+            System.out.println("That wasn't one of the options! Let's try again.");
+            theatreInfoViewing();
+        }
     }
 
     //MODIFIES: Theatre
     //EFFECTS: Changes or retrieves different information relating to a patron
     public void patronInformation() {
+        //
+    }
+
+    //EFFECTS: lets user see information pertaining to a specific show
+    public void specificShowInfo()  {
+        //
+    }
+
+    //MODIFIES: theatre
+    //EFFECTS: lets user modify theatre information
+    public void theatreInfoModifying() {
         //
     }
 
