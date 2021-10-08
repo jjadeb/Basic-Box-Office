@@ -130,4 +130,13 @@ public class ShowListTest {
 
         assertTrue(showList.getUpcomingShowNames().isEmpty());
     }
+
+
+    @Test
+    public void getShowTest() {
+
+        assertEquals(beautyAndTheBeast, showList.getShow("Beauty and the Beast"));
+        assertEquals(cabaret, showList.getShow("Cabaret"));
+
+    }
 }

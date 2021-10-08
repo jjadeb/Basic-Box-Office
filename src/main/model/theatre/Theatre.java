@@ -108,6 +108,11 @@ public class Theatre {
         }
         return find;
     }
+
+    //EFFECTS: Return the show of a give show name
+    public Show getShow(String showName) {
+        return shows.getShow(showName);
+    }
 }
 
 

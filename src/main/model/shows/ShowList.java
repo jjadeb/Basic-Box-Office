@@ -33,15 +33,15 @@ public class ShowList {
     //EFFECTS: provides a list of names of upcoming shows on the date provided, empty if none
     public ArrayList<String> onThisDate(String givenDate) {
         ArrayList<String> showsOnThisDate = new ArrayList<>();
-        for (Show show: upcomingShows) {
-            for (String showDate: show.getDates()) {
+        for (Show show : upcomingShows) {
+            for (String showDate : show.getDates()) {
                 if (showDate == givenDate) {
                     showsOnThisDate.add(show.getTitle());
                 }
             }
         }
-        for (Show show: pastShows) {
-            for (String showDate: show.getDates()) {
+        for (Show show : pastShows) {
+            for (String showDate : show.getDates()) {
                 if (showDate == givenDate) {
                     showsOnThisDate.add(show.getTitle());
                 }
@@ -64,7 +64,7 @@ public class ShowList {
 
     public ArrayList<String> getUpcomingShowNames() {
         ArrayList<String> temp = new ArrayList<>();
-        for (Show show: upcomingShows) {
+        for (Show show : upcomingShows) {
             temp.add(show.getTitle());
         }
         return temp;
@@ -88,4 +88,14 @@ public class ShowList {
         return upcomingShows;
     }
 
+    //EFFECT: returns show of given show name
+    public Show getShow(String showName) {
+        Show theShow = null;
+        for (Show show : upcomingShows) {
+            if (showName.equals(show.getTitle())) {
+                theShow = show;
+            }
+        }
+        return theShow;
+    }
 }

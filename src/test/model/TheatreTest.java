@@ -165,4 +165,13 @@ public class TheatreTest {
         assertEquals(null, massey.getPatron("Shirley", 050405));
 
     }
+
+    @Test
+    public void getShowTest() {
+        massey.addNewShow(cabaret);
+        massey.addNewShow(legallyBlonde);
+
+        assertEquals(legallyBlonde, massey.getShow("Legally Blonde"));
+        assertEquals(cabaret, massey.getShow("Cabaret"));
+    }
 }
