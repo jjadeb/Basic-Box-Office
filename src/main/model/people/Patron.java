@@ -77,12 +77,14 @@ public class Patron {
         return myShows;
     }
 
+    //EFFECTS: Returns the names of upcoming shows
     public ArrayList<String> myUpcomingShowNames() {
-        ArrayList<String> myShowNames = new ArrayList<>();
-        for (Show show : myShows.getUpcomingShows()) {
-            myShowNames.add(show.getTitle());
-        }
-        return myShowNames;
+        return myShows.getUpcomingShowNames();
+    }
+
+    //EFFECTS: Returns the names of past shows
+    public ArrayList<String> myPastShowNames() {
+        return myShows.getPastShowNames();
     }
 
 }

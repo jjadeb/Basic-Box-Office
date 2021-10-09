@@ -77,4 +77,21 @@ class PatronTest {
 
     }
 
+    @Test
+    public void myPastShowNamesTest() {
+        assertTrue(bob.myPastShowNames().isEmpty());
+
+        bob.addShow(cabaret);
+        bob.addShow(crazyForYou);
+
+        assertTrue(bob.myPastShowNames().isEmpty());
+
+        bob.removeShow(cabaret);
+        bob.removeShow(crazyForYou);
+
+        assertTrue(bob.myPastShowNames().contains("Cabaret"));
+        assertTrue(bob.myPastShowNames().contains("Crazy For You"));
+
+    }
+
 }

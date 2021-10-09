@@ -67,4 +67,15 @@ public class Show {
     public void setTicketPrice(int ticketPrice) {
         this.ticketPrice = ticketPrice;
     }
+
+    public ArrayList<String> getPatronNames() {
+        ArrayList<String> patronNames = new ArrayList<>();
+        for (Patron patron : patrons.getPatronList()) {
+            String name = patron.getName();
+            patronNames.add(name);
+        }
+        return patronNames;
+    }
+
+
 }

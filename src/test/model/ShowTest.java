@@ -27,6 +27,8 @@ public class ShowTest {
 
         bob = new Patron();
         shirley = new Patron();
+        bob.setName("Bob");
+        shirley.setName("Shirley");
 
 
     }
@@ -56,5 +58,15 @@ public class ShowTest {
     public void getAndSetPrice() {
         beautyAndTheBeast.setTicketPrice(15);
         assertEquals(15, beautyAndTheBeast.getTicketPrice());
+    }
+
+    @Test
+    public void getPatronNamesTest() {
+        beautyAndTheBeast.addPatron(bob);
+        beautyAndTheBeast.addPatron(shirley);
+
+        assertEquals(2, beautyAndTheBeast.getPatronNames().size());
+        assertTrue(beautyAndTheBeast.getPatronNames().contains("Bob"));
+        assertTrue(beautyAndTheBeast.getPatronNames().contains("Shirley"));
     }
 }
