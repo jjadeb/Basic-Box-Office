@@ -21,7 +21,7 @@ public class PatronList {
     }
 
     //MODIFIES: this
-    //EFFECTS: removes a new patron from the list of patrons
+    //EFFECTS: removes a patron from the list of patrons
     public void removePatron(Patron patron) {
         patronList.remove(patron);
     }

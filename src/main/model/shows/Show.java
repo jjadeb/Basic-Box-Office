@@ -22,15 +22,13 @@ public class Show {
     }
 
     //MODIFIES: this
-    //EFFECTS: adds a patron to the list of people with tickets to the show (if not already there)
+    //EFFECTS: adds a patron to the list of people with tickets to the show
     public void addPatron(Patron patron) {
-        if (!patrons.contains(patron)) {
-            patrons.addNewPatron(patron);
-        }
+        patrons.addNewPatron(patron);
     }
 
     //MODIFIES: this
-    //EFFECTS: adds a patron to the list of people with tickets to the show (if not already there)
+    //EFFECTS: removes a patron from the list of people with tickets to the show
     public void removePatron(Patron patron) {
         patrons.removePatron(patron);
     }
@@ -82,6 +80,7 @@ public class Show {
         this.ticketPrice = ticketPrice;
     }
 
+    //EFFECTS: Returns the names of patrons who have tickets for the show, multiple names means multiple tickets
     public ArrayList<String> getPatronNames() {
         ArrayList<String> patronNames = new ArrayList<>();
         for (Patron patron : patrons.getPatronList()) {

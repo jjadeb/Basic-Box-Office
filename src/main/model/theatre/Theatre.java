@@ -115,6 +115,7 @@ public class Theatre {
         return find;
     }
 
+    //EFFECTS: returns the names of patrons in a patron list
     public ArrayList<String> getPatronNames() {
         ArrayList<String> patronNames = new ArrayList<>();
         for (Patron patron : patrons.getPatronList()) {
@@ -125,11 +126,12 @@ public class Theatre {
     }
 
 
-    //EFFECTS: Return the show of a give show name
+    //EFFECTS: returns the show of a give show name
     public Show getShow(String showName) {
         return shows.getShow(showName);
     }
 
+    //EFFECTS: Returns a list of show names on a given date
     public ArrayList<String> showsOnThisDate(String date) {
         return shows.onThisDate(date);
     }
