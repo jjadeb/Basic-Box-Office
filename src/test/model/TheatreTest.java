@@ -205,4 +205,42 @@ public class TheatreTest {
         assertTrue(massey.getPatronNames().contains("Bob"));
         assertTrue(massey.getPatronNames().contains("Shirley"));
     }
+
+    @Test
+
+    public void showsOnThisDateTest() {
+
+        massey.addNewShow(legallyBlonde);
+        massey.addNewShow(cabaret);
+
+
+        legallyBlonde.addDate("022120");
+        legallyBlonde.addDate("022220");
+        legallyBlonde.addDate("022320");
+
+        cabaret.addDate("021020");
+        cabaret.addDate("022020");
+        cabaret.addDate("022120");
+
+        cabaret.addDate("022320");
+        cabaret.removeDate("022320");
+
+        showList.archive(cabaret);
+
+        assertEquals(1, massey.showsOnThisDate("022320").size());
+        assertEquals(2, massey.showsOnThisDate("022120").size());
+        assertEquals(0, massey.showsOnThisDate("022420").size());
+        assertEquals(1, massey.showsOnThisDate("021020").size());
+        assertEquals(0, massey.showsOnThisDate("020520").size());
+
+        assertTrue(massey.showsOnThisDate("022320").contains("Legally Blonde"));
+        assertTrue(massey.showsOnThisDate("022120").contains("Legally Blonde"));
+        assertTrue(massey.showsOnThisDate("022120").contains("Cabaret"));
+        assertTrue(massey.showsOnThisDate("021020").contains("Cabaret"));
+        assertTrue(massey.showsOnThisDate("020520").isEmpty());
+
+
+
+
+    }
 }

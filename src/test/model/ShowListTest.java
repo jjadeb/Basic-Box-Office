@@ -95,6 +95,8 @@ public class ShowListTest {
         cabaret.addDate("021020");
         cabaret.addDate("022020");
         cabaret.addDate("022120");
+        cabaret.addDate("022320");
+        cabaret.removeDate("022320");
 
         showList.archive(cabaret);
 

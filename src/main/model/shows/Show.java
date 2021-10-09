@@ -29,6 +29,13 @@ public class Show {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: adds a patron to the list of people with tickets to the show (if not already there)
+    public void removePatron(Patron patron) {
+        patrons.removePatron(patron);
+    }
+
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -39,6 +46,13 @@ public class Show {
     //EFFECTS: add a date to the show
     public void addDate(String date) {
         dates.add(date);
+    }
+
+    //REQUIRES: each date must be of the form MMDDYY
+    //MODIFIES: this
+    //EFFECTS: removes a date from the show
+    public void removeDate(String date) {
+        dates.remove(date);
     }
 
 

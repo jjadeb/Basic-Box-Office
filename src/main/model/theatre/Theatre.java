@@ -124,12 +124,17 @@ public class Theatre {
         return patronNames;
     }
 
+
     //EFFECTS: Return the show of a give show name
     public Show getShow(String showName) {
         return shows.getShow(showName);
     }
-}
 
+    public ArrayList<String> showsOnThisDate(String date) {
+        return shows.onThisDate(date);
+    }
+
+}
 
 //    public Iterator<Show> showIterator() {
 //        return shows.getUpcomingShows().iterator();

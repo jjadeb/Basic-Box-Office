@@ -35,14 +35,14 @@ public class ShowList {
         ArrayList<String> showsOnThisDate = new ArrayList<>();
         for (Show show : upcomingShows) {
             for (String showDate : show.getDates()) {
-                if (showDate == givenDate) {
+                if (showDate.equals(givenDate)) {
                     showsOnThisDate.add(show.getTitle());
                 }
             }
         }
         for (Show show : pastShows) {
             for (String showDate : show.getDates()) {
-                if (showDate == givenDate) {
+                if (showDate.equals(givenDate)) {
                     showsOnThisDate.add(show.getTitle());
                 }
             }

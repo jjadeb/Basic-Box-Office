@@ -5,8 +5,7 @@ import model.shows.Show;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ShowTest {
 
@@ -41,6 +40,18 @@ public class ShowTest {
         assertEquals(2,beautyAndTheBeast.patronSize());
         assertTrue(beautyAndTheBeast.isContainsPatron(bob));
         assertTrue(beautyAndTheBeast.isContainsPatron(shirley));
+    }
+
+    @Test
+    public void removePatronTest() {
+        beautyAndTheBeast.addPatron(bob);
+        beautyAndTheBeast.addPatron(shirley);
+
+        beautyAndTheBeast.removePatron(shirley);
+
+        assertEquals(1,beautyAndTheBeast.patronSize());
+        assertTrue(beautyAndTheBeast.isContainsPatron(bob));
+        assertFalse(beautyAndTheBeast.isContainsPatron(shirley));
     }
 
     @Test
