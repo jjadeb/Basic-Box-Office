@@ -14,10 +14,9 @@ public class PatronList {
 
     //MODIFIES this
     //EFFECTS: adds a new patron to the list of patrons
+    //         for a show, multiple of the same patron means they have multiple tickets
     public void addNewPatron(Patron patron) {
-        if (!patronList.contains(patron)) {
-            patronList.add(patron);
-        }
+        patronList.add(patron);
     }
 
     //MODIFIES: this

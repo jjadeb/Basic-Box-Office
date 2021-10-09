@@ -1,6 +1,6 @@
 # My Personal Project
 
-## A Ticket Selling System
+## A Box Office System
 
 
 
@@ -21,7 +21,6 @@ that theatre companies use.
 ## User Stories
 
 - As a user, I want to be able to add a customer profile
-- As a user, I want to be able to view all customer profiles
 - As a user, I want to be able to add a show to the list of
 shows the theatre is putting on
 - As a user, I want to be able to remove a show after its

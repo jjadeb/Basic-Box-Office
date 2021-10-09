@@ -106,6 +106,11 @@ public class ShowList {
                 theShow = show;
             }
         }
+        for (Show show : pastShows) {
+            if (showName.equals(show.getTitle())) {
+                theShow = show;
+            }
+        }
         return theShow;
     }
 }

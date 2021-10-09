@@ -60,7 +60,7 @@ public class ShowTest {
         beautyAndTheBeast.addPatron(shirley);
         beautyAndTheBeast.addPatron(bob);
 
-        assertEquals(2,beautyAndTheBeast.patronSize());
+        assertEquals(3,beautyAndTheBeast.patronSize());
         assertTrue(beautyAndTheBeast.isContainsPatron(bob));
         assertTrue(beautyAndTheBeast.isContainsPatron(shirley));
     }

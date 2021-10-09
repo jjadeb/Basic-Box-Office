@@ -43,7 +43,7 @@ public class PatronListTest {
         listOfPatrons.addNewPatron(bob);
 
         assertTrue(listOfPatrons.contains(bob));
-        assertEquals(1, listOfPatrons.getSize());
+        assertEquals(2, listOfPatrons.getSize());
 
         assertTrue(listOfPatrons.getPatronList().contains(bob));
 

@@ -187,6 +187,7 @@ public class BoxOffice {
     //MODIFIES: show, patron
     //EFFECTS: Lets a user add a show to the patron's show list
     public void patronAddNewShow(Patron patron) {
+        System.out.println("Here are the upcoming shows: " + theatre.getUpcomingShowNames());
         System.out.println("Which show would you like to add the patron to?");
         Show show = theatre.getShow(scanner.nextLine());
 
@@ -217,6 +218,7 @@ public class BoxOffice {
     //MODIFIES: show, patron
     //EFFECTS: Lets a user remove the show from the patron's show list
     public void patronRemoveShow(Patron patron) {
+        System.out.println("Here are the patron's shows: " + patron.myUpcomingShowNames());
         System.out.println("Which show would you like to remove from the patron?");
         Show show = theatre.getShow(scanner.nextLine());
 
@@ -522,25 +524,8 @@ public class BoxOffice {
 
     //EFFECT: Figures out if patron is in the system before selling them a ticket
     public void preTicketSale() {
-        System.out.println("Is this patron already in the system? Type the number (1) yes or not sure, (2) no");
-        String temp = scanner.nextLine();
-        if (temp.equals("1")) {
-            System.out.println("What is the patrons name?");
-            String name = scanner.nextLine();
-            System.out.println("What is the patrons birthday? Enter in format MMDDYY.");
-            Integer birthday = parseInt(scanner.nextLine());
-            if (theatre.getPatron(name, birthday) == null) {
-                System.out.println("That patron is not in our system yet. Let's set up an account for them!");
-                theatreAddPatron();
-            } else {
-                System.out.println("That patron is in our system! Let's get them a ticket.");
-                sellTicket(theatre.getPatron(name, birthday));
-            }
-        } else if (temp.equals("2")) {
-            theatreAddPatron();
-        } else {
-            goBackPre();
-        }
+        Patron patron = getPatron();
+        sellTicket(patron);
     }
 
     //EFFECTS: Finds the patron or sets up the patron account and returns it

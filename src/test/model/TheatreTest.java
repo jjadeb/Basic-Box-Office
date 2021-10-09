@@ -74,7 +74,7 @@ public class TheatreTest {
         massey.addNewPatron(shirley);
         massey.addNewPatron(bob);
 
-        assertEquals(2, massey.patronSize());
+        assertEquals(3, massey.patronSize());
         assertTrue(massey.isContainsPatron(bob));
         assertTrue(massey.isContainsPatron(shirley));
     }
@@ -87,7 +87,7 @@ public class TheatreTest {
 
         massey.removePatron(shirley);
 
-        assertEquals(1, massey.patronSize());
+        assertEquals(2, massey.patronSize());
         assertTrue(massey.isContainsPatron(bob));
         assertFalse(massey.isContainsPatron(shirley));
     }
