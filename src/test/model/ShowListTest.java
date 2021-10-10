@@ -154,5 +154,11 @@ public class ShowListTest {
         assertEquals(beautyAndTheBeast, showList.getShow("Beauty and the Beast"));
         assertEquals(cabaret, showList.getShow("Cabaret"));
 
+        showList.archive(beautyAndTheBeast);
+
+        assertEquals(beautyAndTheBeast, showList.getShow("Beauty and the Beast"));
+
+
+
     }
 }
