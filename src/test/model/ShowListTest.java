@@ -158,7 +158,8 @@ public class ShowListTest {
 
         assertEquals(beautyAndTheBeast, showList.getShow("Beauty and the Beast"));
 
-
+        assertTrue(showList.isGetShow("Beauty and the Beast"));
+        assertFalse(showList.isGetShow("Almost, Maine"));
 
     }
 }

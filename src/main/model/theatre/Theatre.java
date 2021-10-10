@@ -125,10 +125,20 @@ public class Theatre {
         return patronNames;
     }
 
+    //EFFECTS: returns true if a patron is in the records
+    public boolean isGetTheatrePatron(String patronName, Integer patronBirthday) {
+        return (!(getPatron(patronName, patronBirthday) == null));
+    }
+
 
     //EFFECTS: returns the show of a give show name
     public Show getShow(String showName) {
         return shows.getShow(showName);
+    }
+
+    //EFFECTS: returns true if a show is in the records
+    public boolean isGetTheatreShow(String showName) {
+        return shows.isGetShow(showName);
     }
 
     //EFFECTS: Returns a list of show names on a given date

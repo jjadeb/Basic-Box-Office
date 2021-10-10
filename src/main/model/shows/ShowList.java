@@ -113,4 +113,9 @@ public class ShowList {
         }
         return theShow;
     }
+
+    //EFFECTS: Returns true if there is a show to get
+    public boolean isGetShow(String show) {
+        return (!(this.getShow(show) == null));
+    }
 }

@@ -138,6 +138,8 @@ public class TheatreTest {
         shirley.setName("Shirley");
 
         assertEquals(bob, massey.getPatron("Bob", 050402));
+        assertTrue(massey.isGetTheatrePatron("Bob", 050402));
+        assertFalse(massey.isGetTheatrePatron("Shirley", 050403));
     }
 
     @Test
@@ -194,6 +196,9 @@ public class TheatreTest {
 
         assertEquals(legallyBlonde, massey.getShow("Legally Blonde"));
         assertEquals(cabaret, massey.getShow("Cabaret"));
+
+        assertTrue(massey.isGetTheatreShow("Legally Blonde"));
+        assertFalse(massey.isGetTheatreShow("Bob the Builder"));
     }
 
     @Test

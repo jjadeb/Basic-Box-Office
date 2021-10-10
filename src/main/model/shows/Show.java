@@ -11,7 +11,7 @@ public class Show {
     private String title;
     private ArrayList<String> dates;
     private PatronList patrons;
-    private int ticketPrice;
+    private double ticketPrice;
 
 
     public Show() {
@@ -72,11 +72,11 @@ public class Show {
         return patrons.getSize();
     }
 
-    public int getTicketPrice() {
+    public double getTicketPrice() {
         return ticketPrice;
     }
 
-    public void setTicketPrice(int ticketPrice) {
+    public void setTicketPrice(double ticketPrice) {
         this.ticketPrice = ticketPrice;
     }
 

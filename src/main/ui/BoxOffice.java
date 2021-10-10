@@ -6,6 +6,7 @@ import model.theatre.Theatre;
 
 import java.util.Scanner;
 
+import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
 //This is where all the nitty gritty of the user code is
@@ -189,30 +190,29 @@ public class BoxOffice {
     public void patronAddNewShow(Patron patron) {
         System.out.println("Here are the upcoming shows: " + theatre.getUpcomingShowNames());
         System.out.println("Which show would you like to add the patron to?");
-        Show show = theatre.getShow(scanner.nextLine());
-
-        show.addPatron(patron);
-        patron.addShow(show);
-
-        System.out.println(show.getTitle() + " has been added to " + patron.getName() + "'s show list!");
-
-        System.out.println("Would you like to add another show to the patron? "
-                + "(1) 'yes' or (2) 'no'. Please type the corresponding number");
-        String temp = scanner.nextLine();
-        if (temp.equals("1")) {
-            patronAddNewShow(patron);
-        } else if (temp.equals("2")) {
-            //
-        } else {
-            System.out.println("That wasn't one of the options! (1) try again, or (2) go to main menu");
-            String temp3 = scanner.nextLine();
-            if (temp3.equals("1")) {
+        String temp1 = scanner.nextLine();
+        if (theatre.isGetTheatreShow(temp1)) {
+            Show show = theatre.getShow(temp1);
+            show.addPatron(patron);
+            patron.addShow(show);
+            System.out.println(show.getTitle() + " has been added to " + patron.getName() + "'s show list!");
+            System.out.println("Would you like to add another show to the patron? "
+                    + "(1) 'yes' or (2) 'no'. Please type the corresponding number");
+            String temp = scanner.nextLine();
+            if (temp.equals("1")) {
                 patronAddNewShow(patron);
+            } else if (temp.equals("2")) {
+                //
             } else {
+                System.out.println("That wasn't one of the options! Let's go to the main menu.");
                 mainMenu();
             }
+        } else {
+            System.out.println("That show is not in our records. Let's go to the man menu.");
+            mainMenu();
         }
     }
+
 
 
     //MODIFIES: show, patron
@@ -220,28 +220,29 @@ public class BoxOffice {
     public void patronRemoveShow(Patron patron) {
         System.out.println("Here are the patron's shows: " + patron.myUpcomingShowNames());
         System.out.println("Which show would you like to remove from the patron?");
-        Show show = theatre.getShow(scanner.nextLine());
+        String input = scanner.nextLine();
+        if (theatre.isGetTheatreShow(input)) {
+            Show show = theatre.getShow(input);
 
-        show.removePatron(patron);
-        patron.removeShow(show);
+            show.removePatron(patron);
+            patron.removeShow(show);
 
-        System.out.println(show.getTitle() + " has been removed from " + patron.getName() + "'s show list!");
+            System.out.println(show.getTitle() + " has been removed from " + patron.getName() + "'s show list!");
 
-        System.out.println("Would you like to remove another show from the patron's list? "
-                + "(1) 'yes' or (2) 'no'. Please type the corresponding number");
-        String temp = scanner.nextLine();
-        if (temp.equals("1")) {
-            patronRemoveShow(patron);
-        } else if (temp.equals("2")) {
-            //
-        } else {
-            System.out.println("That wasn't one of the options! (1) try again, or (2) go to main menu");
-            String temp3 = scanner.nextLine();
-            if (temp3.equals("1")) {
+            System.out.println("Would you like to remove another show from the patron's list? "
+                    + "(1) 'yes' or (2) 'no'. Please type the corresponding number");
+            String temp = scanner.nextLine();
+            if (temp.equals("1")) {
                 patronRemoveShow(patron);
+            } else if (temp.equals("2")) {
+                //
             } else {
+                System.out.println("That wasn't one of the options! Let's go to the main menu.");
                 mainMenu();
             }
+        } else {
+            System.out.println("This show is not in our system yet. Let's go back to the main menu");
+            mainMenu();
         }
     }
 
@@ -270,45 +271,59 @@ public class BoxOffice {
     public void theatreArchiveShow() {
         System.out.println("Which show would you like to archive?");
         System.out.println("Here is the list of upcoming shows: " + theatre.getUpcomingShowNames());
-        Show show = theatre.getShow(scanner.nextLine());
-        theatre.archiveShow(show);
-        System.out.println(show.getTitle() + " is now archived!");
+        String input = scanner.nextLine();
+        if (theatre.isGetTheatreShow(input)) {
+            Show show = theatre.getShow(input);
+            theatre.archiveShow(show);
+            System.out.println(show.getTitle() + " is now archived!");
 
-        System.out.println("Would you like to archive another show? "
-                + "(1) 'yes' or (2) 'no'. Please type the corresponding number.");
-        String temp = scanner.nextLine();
-        if (temp.equals("1")) {
-            theatreArchiveShow();
-        } else if (temp.equals("2")) {
-            //
+            System.out.println("Would you like to archive another show? "
+                    + "(1) 'yes' or (2) 'no'. Please type the corresponding number.");
+            String temp = scanner.nextLine();
+            if (temp.equals("1")) {
+                theatreArchiveShow();
+            } else if (temp.equals("2")) {
+                //
+            } else {
+                System.out.println("That wasn't one of the options! Going to main menu.");
+                mainMenu();
+            }
         } else {
-            System.out.println("That wasn't one of the options! Going to main menu.");
+            System.out.println("That show is not in our records. Let's go back to the main menu.");
             mainMenu();
         }
+
     }
 
 
     //EFFECTS: Lets user choose which show's information they would like to change
+    @SuppressWarnings("methodlength")
     public void changeSpecificShow() {
         System.out.println("Here is the list of upcoming and past shows: " + theatre.getUpcomingShowNames()
                 + theatre.getPastShowNames());
         System.out.println("Which show's info would you like to modify?");
-        Show show = theatre.getShow(scanner.nextLine());
-        System.out.println("Which info would you like to modify? (1) title, (2) dates, (3) patrons, (4) ticket price, "
-                + "(5) nothing (go back to main menu)");
-        String temp = scanner.nextLine();
-        if (temp.equals("1")) {
-            modifyShowTitle(show);
-        } else if (temp.equals("2")) {
-            modifyShowDates(show);
-        } else if (temp.equals("3")) {
-            modifyShowPatrons(show);
-        } else if (temp.equals("4")) {
-            modifyShowTicketPrice(show);
-        } else if (temp.equals("5")) {
-            mainMenu();
+        String input = scanner.nextLine();
+        if (theatre.isGetTheatreShow(input)) {
+            Show show = theatre.getShow(input);
+            System.out.println("Which info would you like to modify? (1) title, (2) dates, (3) patrons, "
+                    + "(4) ticket price, (5) nothing (go back to main menu)");
+            String temp = scanner.nextLine();
+            if (temp.equals("1")) {
+                modifyShowTitle(show);
+            } else if (temp.equals("2")) {
+                modifyShowDates(show);
+            } else if (temp.equals("3")) {
+                modifyShowPatrons(show);
+            } else if (temp.equals("4")) {
+                modifyShowTicketPrice(show);
+            } else if (temp.equals("5")) {
+                mainMenu();
+            } else {
+                System.out.println("That wasn't one of the options! Let's go back to the main menu.");
+                mainMenu();
+            }
         } else {
-            System.out.println("That wasn't one of the options! Let's go back to the main menu.");
+            System.out.println("That show is not in our system yet. Let's go to the main menu.");
             mainMenu();
         }
     }
@@ -364,11 +379,8 @@ public class BoxOffice {
     //MODIFIES: patron, show
     //EFFECTS: Lets user add a patron to a show
     public void theatreAddPatronToShow(Show show) {
-        System.out.println("What is the patrons name?");
-        String name = scanner.nextLine();
-        System.out.println("What is the patrons birthday? Enter in format MMDDYY.");
-        Integer birthday = parseInt(scanner.nextLine());
-        Patron patron = theatre.getPatron(name, birthday);
+
+        Patron patron = getPatron();
 
         show.addPatron(patron);
         patron.addShow(show);
@@ -396,11 +408,7 @@ public class BoxOffice {
     //MODIFIES: patron, show
     //EFFECTS: Lets user remove a patron from a show
     public void theatreRemovePatronFromShow(Show show) {
-        System.out.println("What is the patrons name?");
-        String name = scanner.nextLine();
-        System.out.println("What is the patrons birthday? Enter in format MMDDYY.");
-        Integer birthday = parseInt(scanner.nextLine());
-        Patron patron = theatre.getPatron(name, birthday);
+        Patron patron = getPatron();
 
         show.removePatron(patron);
         patron.removeShow(show);
@@ -431,7 +439,7 @@ public class BoxOffice {
         System.out.println("Here is the current ticket price of " + show.getTitle() + ":" + show.getTicketPrice());
         System.out.println("What would you like the new ticket price to be?");
         String newPrice = scanner.nextLine();
-        show.setTicketPrice(parseInt(newPrice));
+        show.setTicketPrice(parseDouble(newPrice));
         System.out.println("The new ticket price of " + show.getTitle() + " is " + show.getTicketPrice());
     }
 
@@ -442,24 +450,26 @@ public class BoxOffice {
                 + theatre.getPastShowNames());
         System.out.println("Which show would you like to view?");
         String temp = scanner.nextLine();
-        Show show = theatre.getShow(temp);
-        System.out.println("Which information would you like to view? (1) dates, (2) patron list, or (3) ticket price");
-        String temp2 = scanner.nextLine();
-        if (temp2.equals("1")) {
-            System.out.println("Here are the dates for " + show.getTitle() + ": " + show.getDates());
-        } else if (temp2.equals("2")) {
-            System.out.println("Here are the patrons for " + show.getTitle() + ": " + show.getPatronNames());
-        } else if (temp2.equals("3")) {
-            System.out.println("Here is the ticket price for " + show.getTitle() + ": " + show.getTicketPrice());
-        } else {
-            System.out.println("That wasn't one of the options! (1) try again, or (2) go to main menu");
-            String temp3 = scanner.nextLine();
-            if (temp3.equals("1")) {
-                viewShowInfo();
+        if (theatre.isGetTheatreShow(temp)) {
+            Show show = theatre.getShow(temp);
+            System.out.println("Which information would you like to view? (1) dates, (2) patron list, or "
+                    + "(3) ticket price");
+            String temp2 = scanner.nextLine();
+            if (temp2.equals("1")) {
+                System.out.println("Here are the dates for " + show.getTitle() + ": " + show.getDates());
+            } else if (temp2.equals("2")) {
+                System.out.println("Here are the patrons for " + show.getTitle() + ": " + show.getPatronNames());
+            } else if (temp2.equals("3")) {
+                System.out.println("Here is the ticket price for " + show.getTitle() + ": " + show.getTicketPrice());
             } else {
+                System.out.println("That wasn't one of the options! Let's go to the main menu.");
                 mainMenu();
             }
+        } else {
+            System.out.println("That show isn't in our records. Let's go to the main menu.");
+            mainMenu();
         }
+
     }
 
     //EFFECTS: lets user choose between quitting the program or going to the main menu
@@ -576,7 +586,7 @@ public class BoxOffice {
         theatreAddDate(show);
 
         System.out.println("Please enter the price of the show tickets:");
-        show.setTicketPrice(parseInt(scanner.nextLine()));
+        show.setTicketPrice(parseDouble(scanner.nextLine()));
 
 
         System.out.println("Would you like to add another show? "
@@ -649,22 +659,6 @@ public class BoxOffice {
         System.out.println("What is " + patron.getName() + "'s birthday? Please enter in form MMDDYY.");
         patron.setBirthday(parseInt(scanner.nextLine()));
 
-        System.out.println("Would " + patron.getName() + " like to buy a ticket now?");
-        System.out.println("(1) 'yes' or (2) 'no'. Please type the corresponding number");
-        String temp = scanner.nextLine();
-        if (temp.equals("1")) {
-            sellTicket(patron);
-        } else if (temp.equals("2")) {
-            System.out.println("Alrighty matey! Maybe next time.");
-        } else {
-            System.out.println("That wasn't one of the options! (1) try again, or (2) go to main menu");
-            String temp3 = scanner.nextLine();
-            if (temp3.equals("1")) {
-                theatreAddPatron();
-            } else {
-                mainMenu();
-            }
-        }
         return patron;
     }
 
@@ -675,19 +669,24 @@ public class BoxOffice {
         System.out.println("Here are the upcoming shows:" + theatre.getUpcomingShowNames());
         System.out.println("Which show would " + patron.getName() + " like to see?");
         String temp = scanner.nextLine();
-        Show show = theatre.getShow(temp);
+        if (theatre.isGetTheatreShow(temp)) {
+            Show show = theatre.getShow(temp);
 
-        ticketExchange(show, patron);
+            ticketExchange(show, patron);
 
-        System.out.println("Would " + patron.getName() + " like to buy another ticket? "
-                + "(1) yes, (2) no go to main menu");
-        String temp2 = scanner.nextLine();
-        if (temp2.equals("1")) {
-            sellTicket(patron);
-        } else if (temp2.equals("2")) {
-            mainMenu();
-        }  else {
-            System.out.println("That wasn't one of the options. Let's go to the main menu.");
+            System.out.println("Would " + patron.getName() + " like to buy another ticket? "
+                    + "(1) yes, (2) no go to main menu");
+            String temp2 = scanner.nextLine();
+            if (temp2.equals("1")) {
+                sellTicket(patron);
+            } else if (temp2.equals("2")) {
+                mainMenu();
+            }  else {
+                System.out.println("That wasn't one of the options. Let's go to the main menu.");
+                mainMenu();
+            }
+        } else {
+            System.out.println("That show isn't in our records. Let's go to the main menu.");
             mainMenu();
         }
     }
