@@ -43,6 +43,11 @@ public class Theatre {
     //MODIFIES: this
     //EFFECTS: Moves a show from the upcoming show list to the past show list
     public void archiveShow(Show show) {
+        for (Patron patron: show.getPatrons().getPatronList()) {
+            if (show.isContainsPatron(patron)) {
+                patron.removeShow(show);
+            }
+        }
         shows.archive(show);
     }
 

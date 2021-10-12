@@ -58,6 +58,11 @@ public class TheatreTest {
         massey.addNewShow(legallyBlonde);
         massey.addNewShow(cabaret);
 
+        bob.addShow(legallyBlonde);
+        legallyBlonde.addPatron(bob);
+
+        assertTrue(bob.isContainedInMyUpcomingShows(legallyBlonde));
+
         massey.archiveShow(legallyBlonde);
 
         assertEquals(2, massey.upcomingShowSize());
@@ -65,6 +70,7 @@ public class TheatreTest {
         assertTrue(massey.isUpcomingShow(cabaret));
         assertFalse(massey.isUpcomingShow(legallyBlonde));
         assertTrue(massey.isPastShow(legallyBlonde));
+        assertTrue(bob.isContainedInMyPastShows(legallyBlonde));
 
     }
 

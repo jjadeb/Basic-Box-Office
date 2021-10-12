@@ -80,6 +80,10 @@ public class Show {
         this.ticketPrice = ticketPrice;
     }
 
+    public PatronList getPatrons() {
+        return patrons;
+    }
+
     //EFFECTS: Returns the names of patrons who have tickets for the show, multiple names means multiple tickets
     public ArrayList<String> getPatronNames() {
         ArrayList<String> patronNames = new ArrayList<>();
