@@ -203,7 +203,7 @@ public class BoxOffice {
             if (temp.equals("1")) {
                 patronAddNewShow(patron);
             } else if (temp.equals("2")) {
-                //
+                // do nothing
             } else {
                 System.out.println("That wasn't one of the options! Let's go to the main menu.");
                 mainMenu();
@@ -284,7 +284,7 @@ public class BoxOffice {
             if (temp.equals("1")) {
                 theatreArchiveShow();
             } else if (temp.equals("2")) {
-                //
+                // do nothing
             } else {
                 System.out.println("That wasn't one of the options! Going to main menu.");
                 mainMenu();
@@ -394,7 +394,7 @@ public class BoxOffice {
         if (temp.equals("1")) {
             theatreAddPatronToShow(show);
         } else if (temp.equals("2")) {
-            //
+            // do nothing
         } else {
             System.out.println("That wasn't one of the options! (1) try again, or (2) go to main menu");
             String temp3 = scanner.nextLine();
@@ -596,7 +596,7 @@ public class BoxOffice {
         if (temp.equals("1")) {
             theatreAddShow();
         } else if (temp.equals("2")) {
-            //
+            // do nothing
         } else {
             System.out.println("That wasn't one of the options! Going to main menu.");
             mainMenu();
@@ -616,7 +616,7 @@ public class BoxOffice {
         if (temp.equals("1")) {
             theatreAddDate(show);
         } else if (temp.equals("2")) {
-            //
+            // do nothing
         } else {
             System.out.println("That wasn't one of the options! Let's go to the main menu.");
             mainMenu();
