@@ -60,7 +60,9 @@ public class TheatreTest {
 
         bob.addShow(legallyBlonde);
         legallyBlonde.addPatron(bob);
+
         shirley.addShow(cabaret);
+        cabaret.addPatron(shirley);
 
         assertTrue(bob.isContainedInMyUpcomingShows(legallyBlonde));
 
@@ -71,6 +73,7 @@ public class TheatreTest {
         assertTrue(massey.isUpcomingShow(cabaret));
         assertFalse(massey.isUpcomingShow(legallyBlonde));
         assertTrue(massey.isPastShow(legallyBlonde));
+        assertFalse(bob.isContainedInMyUpcomingShows(legallyBlonde));
         assertTrue(bob.isContainedInMyPastShows(legallyBlonde));
         assertTrue(shirley.isContainedInMyUpcomingShows(cabaret));
 
@@ -182,7 +185,7 @@ public class TheatreTest {
     }
 
     @Test
-    public void getPatronTestTrueNeither() {
+    public void getPatronTestTrueNeither1() {
 
         massey.addNewPatron(bob);
         massey.addNewPatron(shirley);
@@ -194,6 +197,38 @@ public class TheatreTest {
         shirley.setName("Shirley");
 
         assertEquals(null, massey.getPatron("Shirley", 050405));
+
+    }
+
+    @Test
+    public void getPatronTestTrueNeither2() {
+
+        massey.addNewPatron(bob);
+        massey.addNewPatron(shirley);
+
+        bob.setBirthday(050401);
+        bob.setName("Bob");
+
+        shirley.setBirthday(050402);
+        shirley.setName("Shirley");
+
+        assertEquals(null, massey.getPatron("Cat", 050401));
+
+    }
+
+    @Test
+    public void getPatronTestTrueNeither3() {
+
+        massey.addNewPatron(bob);
+        massey.addNewPatron(shirley);
+
+        bob.setBirthday(050401);
+        bob.setName("Bob");
+
+        shirley.setBirthday(050402);
+        shirley.setName("Shirley");
+
+        assertEquals(null, massey.getPatron("Cat", 050454));
 
     }
 
