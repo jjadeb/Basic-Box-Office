@@ -209,6 +209,9 @@ public class TheatreTest {
 
     @Test
     public void getPatronNamesTest() {
+
+        assertTrue(massey.getPatronNames().isEmpty());
+
         massey.addNewPatron(bob);
         massey.addNewPatron(shirley);
 
