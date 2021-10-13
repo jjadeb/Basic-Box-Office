@@ -6,7 +6,6 @@ import model.shows.Show;
 import model.shows.ShowList;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 //Represent a theatre patron that has signed up for an account with the theatre
 public class Patron {
@@ -15,6 +14,7 @@ public class Patron {
     int birthday;
     ShowList myShows;
 
+    //EFFECTS: constructs a patron
     public Patron() {
         myShows = new ShowList();
         name = "";
@@ -24,12 +24,12 @@ public class Patron {
     }
 
     //MODIFIES: this
-    // EFFECT: adds a new show to the patrons upcoming show list
+    // EFFECT: adds a new show to the patrons upcoming show list, can add multiple times to represent multiple tickets
     public void addShow(Show show) {
         myShows.addNewShow(show);
     }
 
-    //REQUIRES: the show must not already be in the past show list
+
     //MODIFIES: this
     //EFFECT: removes a show from the patrons upcoming show list and adds it to their past shows
     public void removeShow(Show show) {
@@ -72,7 +72,6 @@ public class Patron {
         return birthday;
     }
 
-
     public ShowList getMyShows() {
         return myShows;
     }
@@ -88,8 +87,4 @@ public class Patron {
     }
 
 }
-//    @Override
-//    public Iterator<Show> iterator() {
-//        return myShows.getUpcomingShows().iterator();
-//    }
-//}
+

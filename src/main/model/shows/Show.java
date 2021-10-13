@@ -14,6 +14,7 @@ public class Show {
     private double ticketPrice;
 
 
+    //EFFECTS: constructs a show
     public Show() {
         patrons = new PatronList();
         dates = new ArrayList<>();

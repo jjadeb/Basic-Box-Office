@@ -8,6 +8,7 @@ public class PatronList {
 
     private ArrayList<Patron> patronList;
 
+    //EFFECTS: constructs a list of patrons
     public PatronList() {
         patronList = new ArrayList<>();
     }

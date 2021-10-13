@@ -12,9 +12,10 @@ import static java.lang.Integer.parseInt;
 //This is where all the nitty gritty of the user code is
 public class BoxOffice {
 
-    private Scanner scanner; //some structure and code taken from SimpleCalculatorSolutionLecLab
+    private Scanner scanner; //some structure and code for the scanner taken from SimpleCalculatorSolutionLecLab
     private Theatre theatre = new Theatre();
 
+    //EFFECTS: constructs a box office
     public BoxOffice() {
         scanner = new Scanner(System.in);
         if (theatre.getName().equals("")) {
@@ -25,7 +26,7 @@ public class BoxOffice {
 
 
     //MODIFIES: theatre
-    //EFFECTS: Sets up the theatre information
+    //EFFECTS: sets up the theatre information
     public void setUp() {
         System.out.println("Welcome to the Box Office!");
         System.out.println("First, set up the information for your theatre.");
@@ -58,7 +59,7 @@ public class BoxOffice {
     }
 
 
-    //EFFECTS: lets user choose whether they want to view or change information
+    //EFFECTS: lets user choose whether they want to view or change theatre information
     public void theatreInformation() {
         System.out.println("Would you like to (1) view theatre information, (2) modify theatre information, "
                 + "or (3) go back to the main menu?");
@@ -102,7 +103,7 @@ public class BoxOffice {
         }
     }
 
-    //EFFECTS: Lets user view which shows are on a given date
+    //EFFECTS: lets user view which shows are on a given date
     public void showFromGivenDate() {
         System.out.println("For which date would you like to view the shows?");
         String date = scanner.nextLine();
@@ -110,7 +111,7 @@ public class BoxOffice {
     }
 
 
-    //EFFECTS: Retrieves different information relating to a patron
+    //EFFECTS: retrieves different information relating to a patron
     public void viewPatronInformation() {
         Patron patron = getPatron();
         System.out.println("What information would you like to view? (1) upcoming shows, (2) past shows");
@@ -151,7 +152,7 @@ public class BoxOffice {
     }
 
     //MODIFIES: patron
-    //EFFECTS: Allows user to change patron name
+    //EFFECTS: allows user to change patron name
     public void changePatronName(Patron patron) {
         System.out.println("What would you like to change the patron's name to?");
         patron.setName(scanner.nextLine());
@@ -159,7 +160,7 @@ public class BoxOffice {
     }
 
     //MODIFIES: patron
-    //EFFECTS: Allows user to change patron birthday
+    //EFFECTS: allows user to change patron birthday
     public void changePatronBirthday(Patron patron) {
         System.out.println("What would you like to change the patron's birthday to? Please enter in form MMDDYY");
         patron.setBirthday(parseInt(scanner.nextLine()));
@@ -167,7 +168,7 @@ public class BoxOffice {
     }
 
 
-    //EFFECTS: Allows user to choose what show info to change
+    //EFFECTS: allows user to choose what show info to change
     public void changePatronShow(Patron patron) {
         System.out.println("What show information would you like to change? (1) add new show, (2) remove show"
                 + " (3) nothing go to main menu");
@@ -186,7 +187,7 @@ public class BoxOffice {
     }
 
     //MODIFIES: show, patron
-    //EFFECTS: Lets a user add a show to the patron's show list
+    //EFFECTS: lets a user add a show to the patron's show list
     public void patronAddNewShow(Patron patron) {
         System.out.println("Here are the upcoming shows: " + theatre.getUpcomingShowNames());
         System.out.println("Which show would you like to add the patron to?");
@@ -216,7 +217,7 @@ public class BoxOffice {
 
 
     //MODIFIES: show, patron
-    //EFFECTS: Lets a user remove the show from the patron's show list
+    //EFFECTS: lets a user remove the show from the patron's show list
     public void patronRemoveShow(Patron patron) {
         System.out.println("Here are the patron's shows: " + patron.myUpcomingShowNames());
         System.out.println("Which show would you like to remove from the patron?");
@@ -329,7 +330,7 @@ public class BoxOffice {
     }
 
     //MODIFIES: show
-    //EFFECTS: Lets user modify show title
+    //EFFECTS: lets user modify show title
     public void modifyShowTitle(Show show) {
         System.out.println("Here is the current title of the show: " + show.getTitle());
         System.out.println("What would you like to change the title of the show to?");
@@ -339,7 +340,7 @@ public class BoxOffice {
     }
 
     //MODIFIES: show
-    //EFFECTS: Lets user modify show dates
+    //EFFECTS: lets user modify show dates
     public void modifyShowDates(Show show) {
         System.out.println("Here are the current dates of the show: " + show.getDates());
         System.out.println("Would you like to (1) add a date, (2) remove a date, (3) go back to the main menu");
@@ -358,7 +359,7 @@ public class BoxOffice {
     }
 
 
-    //EFFECTS: Lets user choose how to modify a show's patrons
+    //EFFECTS: lets user choose how to modify a show's patrons
     public void modifyShowPatrons(Show show) {
         System.out.println("Here are the current patrons of the show: " + show.getPatronNames());
         System.out.println("Would you like to (1) add a patron, (2) remove a patron, (3) go back to the main menu");
@@ -377,7 +378,7 @@ public class BoxOffice {
 
 
     //MODIFIES: patron, show
-    //EFFECTS: Lets user add a patron to a show
+    //EFFECTS: lets user add a patron to a show
     public void theatreAddPatronToShow(Show show) {
 
         Patron patron = getPatron();
@@ -406,7 +407,7 @@ public class BoxOffice {
     }
 
     //MODIFIES: patron, show
-    //EFFECTS: Lets user remove a patron from a show
+    //EFFECTS: lets user remove a patron from a show
     public void theatreRemovePatronFromShow(Show show) {
         Patron patron = getPatron();
 
@@ -434,7 +435,7 @@ public class BoxOffice {
     }
 
     //MODIFIES: show
-    //EFFECTS: Lets user change a show ticket price
+    //EFFECTS: lets user change a show ticket price
     public void modifyShowTicketPrice(Show show) {
         System.out.println("Here is the current ticket price of " + show.getTitle() + ":" + show.getTicketPrice());
         System.out.println("What would you like the new ticket price to be?");
@@ -532,13 +533,13 @@ public class BoxOffice {
         System.out.println("Theatre name is now " + theatre.getName() + "!");
     }
 
-    //EFFECT: Figures out if patron is in the system before selling them a ticket
+    //EFFECT: makes or gets a patron before selling them a ticket
     public void preTicketSale() {
         Patron patron = getPatron();
         sellTicket(patron);
     }
 
-    //EFFECTS: Finds the patron or sets up the patron account and returns it
+    //EFFECTS: finds the patron or sets up the patron account and returns it
     public Patron getPatron() {
         System.out.println("Is this patron already in the system? Type the number (1) yes or not sure, (2) no");
         String temp = scanner.nextLine();
@@ -563,7 +564,7 @@ public class BoxOffice {
         return patron;
     }
 
-    //EFFECTS: Gives option to go to preTicketSale or mainMenu
+    //EFFECTS: gives option to go to preTicketSale or mainMenu
     public void goBackPre() {
         System.out.println("That wasn't one of the options! (1) try again, or (2) go to main menu");
         String temp3 = scanner.nextLine();
@@ -664,7 +665,7 @@ public class BoxOffice {
 
 
 
-    //EFFECT: Sell ticket to the patron
+    //EFFECTS: sell ticket to the patron
     public void sellTicket(Patron patron) {
         System.out.println("Here are the upcoming shows:" + theatre.getUpcomingShowNames());
         System.out.println("Which show would " + patron.getName() + " like to see?");

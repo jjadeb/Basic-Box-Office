@@ -9,11 +9,13 @@ public class ShowList {
     private ArrayList<Show> pastShows;
 
 
+    //EFFECTS: constructs a list of shows including upcoming and past
     public ShowList() {
         upcomingShows = new ArrayList<>();
         pastShows = new ArrayList<>();
     }
 
+    //REQUIRES: new show must not have the same name as another show
     //MODIFIES: this
     //EFFECTS: adds a show to the list of upcoming shows; can add multiple times to represent multiple tickets
     public void addNewShow(Show show) {
@@ -21,7 +23,6 @@ public class ShowList {
     }
 
 
-    //REQUIRES: show must not already be in the pastShow list
     //MODIFIES: this
     //EFFECTS: removes a show from upcoming shows and adds it to past shows
     public void archive(Show show) {
@@ -51,12 +52,12 @@ public class ShowList {
     }
 
 
-    //EFFECTS: checks to see if a show is in the upcoming show list
+    //EFFECTS: returns true if a show is in the upcoming show list
     public boolean isContainedInUpcoming(Show show) {
         return upcomingShows.contains(show);
     }
 
-    //EFFECTS: checks to see if a show is in the past show list
+    //EFFECTS: returns true if a show is in the past show list
     public boolean isContainedInPast(Show show) {
         return pastShows.contains(show);
     }

@@ -6,7 +6,6 @@ import model.shows.Show;
 import model.shows.ShowList;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 //Represents a theatre that hosts shows
 public class Theatre {
@@ -17,12 +16,11 @@ public class Theatre {
     ShowList shows;
 
 
+    //EFFECTS: constructs a theatre
     public Theatre() {
         patrons = new PatronList();
         shows = new ShowList();
         name = "";
-
-
     }
 
     public void setName(String name) {
@@ -34,14 +32,13 @@ public class Theatre {
     }
 
     //MODIFIES: this
-    //EFFECTS: Adds a show to the upcoming show list
+    //EFFECTS: adds a show to the upcoming show list
     public void addNewShow(Show show) {
         shows.addNewShow(show);
     }
 
-    //REQUIRES: Show must not be in the past show list
     //MODIFIES: this
-    //EFFECTS: Moves a show from the upcoming show list to the past show list
+    //EFFECTS: moves a show from the upcoming show list to the past show list
     public void archiveShow(Show show) {
         for (Patron patron: show.getPatrons().getPatronList()) {
             if (show.isContainsPatron(patron)) {
@@ -52,64 +49,64 @@ public class Theatre {
     }
 
     //MODIFIES: this
-    //EFFECTS: Adds a patron to the list of theatre patrons
+    //EFFECTS: adds a patron to the list of theatre patrons
     public void addNewPatron(Patron patron) {
         patrons.addNewPatron(patron);
     }
 
     //MODIFIES: this
-    //EFFECTS: Removes a patron from the list of theatre patrons
+    //EFFECTS: removes a patron from the list of theatre patrons
     public void removePatron(Patron patron) {
         patrons.removePatron(patron);
     }
 
 
-    //EFFECTS: Checks to see if a patron is in the patron list
+    //EFFECTS: checks to see if a patron is in the patron list
     public boolean isContainsPatron(Patron patron) {
         return patrons.contains(patron);
     }
 
-    //EFFECTS: Returns the size of the patron list
+    //EFFECTS: returns the size of the patron list
     public int patronSize() {
         return patrons.getSize();
     }
 
-    //EFFECTS: Checks to see if a show is in the upcoming show list
+    //EFFECTS: checks to see if a show is in the upcoming show list
     public boolean isUpcomingShow(Show show) {
         return shows.isContainedInUpcoming(show);
     }
 
-    //EFFECTS: Checks to see if a show is in the past show list
+    //EFFECTS: checks to see if a show is in the past show list
     public boolean isPastShow(Show show) {
         return shows.isContainedInPast(show);
     }
 
-    //EFFECTS: Returns the size of the upcoming show list
+    //EFFECTS: returns the size of the upcoming show list
     public int upcomingShowSize() {
         return shows.getUpcomingShowsSize();
     }
 
-    //EFFECTS: Returns the size of the past show list
+    //EFFECTS: returns the size of the past show list
     public int pastShowSize() {
         return shows.getPastShowsSize();
     }
 
-    //EFFECTS: Returns the names of upcoming shows
+    //EFFECTS: returns the names of upcoming shows
     public ArrayList<String> getUpcomingShowNames() {
         return shows.getUpcomingShowNames();
     }
 
-    //EFFECTS: Returns the names of upcoming shows
+    //EFFECTS: returns the names of upcoming shows
     public ArrayList<String> getPastShowNames() {
         return shows.getPastShowNames();
     }
 
-    //EFFECTS: Returns  upcoming shows
+    //EFFECTS: returns upcoming shows
     public ArrayList<Show> getUpcomingShows() {
         return shows.getUpcomingShows();
     }
 
-    //EFFECTS: Retrieves patron from theatre list
+    //EFFECTS: retrieves patron from a theatre's list of patrons
     public Patron getPatron(String name, Integer birthday) {
         Patron find = null;
         for (Patron patron : patrons.getPatronList()) {
@@ -152,12 +149,3 @@ public class Theatre {
     }
 
 }
-
-//    public Iterator<Show> showIterator() {
-//        return shows.getUpcomingShows().iterator();
-//    }
-
-//    public Iterator<Patron> patronIterator() {
-//        return patrons.getPatronList().iterator();
-//    }
-//}
