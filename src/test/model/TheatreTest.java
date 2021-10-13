@@ -60,6 +60,7 @@ public class TheatreTest {
 
         bob.addShow(legallyBlonde);
         legallyBlonde.addPatron(bob);
+        shirley.addShow(cabaret);
 
         assertTrue(bob.isContainedInMyUpcomingShows(legallyBlonde));
 
@@ -71,6 +72,7 @@ public class TheatreTest {
         assertFalse(massey.isUpcomingShow(legallyBlonde));
         assertTrue(massey.isPastShow(legallyBlonde));
         assertTrue(bob.isContainedInMyPastShows(legallyBlonde));
+        assertTrue(shirley.isContainedInMyUpcomingShows(cabaret));
 
     }
 
