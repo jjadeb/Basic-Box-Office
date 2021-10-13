@@ -212,7 +212,7 @@ public class TheatreTest {
         shirley.setBirthday(050402);
         shirley.setName("Shirley");
 
-        assertEquals(null, massey.getPatron("Cat", 050401));
+        assertNull(massey.getPatron("Cat", 050401));
 
     }
 
@@ -228,12 +228,15 @@ public class TheatreTest {
         shirley.setBirthday(050402);
         shirley.setName("Shirley");
 
-        assertEquals(null, massey.getPatron("Cat", 050454));
+        assertNull(massey.getPatron("Cat", 050454));
 
     }
 
     @Test
     public void getShowTest() {
+
+        assertNull(massey.getShow("Cabaret"));
+
         massey.addNewShow(cabaret);
         massey.addNewShow(legallyBlonde);
 
