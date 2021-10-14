@@ -35,6 +35,7 @@ public class Show {
     }
 
 
+    //REQUIRES: show shouldn't have the same title as another show
     public void setTitle(String title) {
         this.title = title;
     }

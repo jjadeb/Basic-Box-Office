@@ -15,7 +15,7 @@ public class ShowList {
         pastShows = new ArrayList<>();
     }
 
-    //REQUIRES: new show must not have the same name as another show
+
     //MODIFIES: this
     //EFFECTS: adds a show to the list of upcoming shows; can add multiple times to represent multiple tickets
     public void addNewShow(Show show) {
@@ -79,6 +79,16 @@ public class ShowList {
             temp.add(show.getTitle());
         }
         return temp;
+    }
+
+    //MODIFIES: this
+    //EFFECTS: removes show from upcoming and past show lists
+    public void removeShow(Show show) {
+        if (upcomingShows.contains(show)) {
+            upcomingShows.remove(show);
+        } else if (pastShows.contains(show)) {
+            pastShows.remove(show);
+        }
     }
 
     //EFFECT: returns the size of the upcoming show list

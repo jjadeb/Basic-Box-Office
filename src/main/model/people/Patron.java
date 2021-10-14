@@ -19,8 +19,6 @@ public class Patron {
         myShows = new ShowList();
         name = "";
         birthday = 111111;
-
-
     }
 
     //MODIFIES: this
@@ -56,6 +54,7 @@ public class Patron {
         return myShows.getPastShowsSize();
     }
 
+    //REQUIRES: no patron should have the same name
     public void setName(String name) {
         this.name = name;
     }

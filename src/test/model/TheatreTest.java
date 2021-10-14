@@ -53,6 +53,40 @@ public class TheatreTest {
     }
 
     @Test
+    public void containsShowNameTest() {
+        massey.addNewShow(cabaret);
+        massey.addNewShow(legallyBlonde);
+
+        massey.archiveShow(legallyBlonde);
+
+        assertTrue(massey.containsShowName("Cabaret"));
+        assertTrue(massey.containsShowName("Legally Blonde"));
+
+    }
+
+    @Test
+    public void removeShowTest() {
+        massey.addNewShow(cabaret);
+        massey.addNewShow(legallyBlonde);
+        massey.addNewShow(cabaret);
+
+        assertEquals(3, massey.upcomingShowSize());
+        assertTrue(massey.isUpcomingShow(cabaret));
+        assertTrue(massey.isUpcomingShow(legallyBlonde));
+        assertTrue(massey.getUpcomingShows().contains(legallyBlonde));
+
+        massey.removeShow(legallyBlonde);
+
+        assertEquals(2, massey.upcomingShowSize());
+        assertTrue(massey.isUpcomingShow(cabaret));
+        assertFalse(massey.isUpcomingShow(legallyBlonde));
+        assertFalse(massey.getUpcomingShows().contains(legallyBlonde));
+
+    }
+
+
+
+    @Test
     public void archiveShowTest() {
         massey.addNewShow(cabaret);
         massey.addNewShow(legallyBlonde);
@@ -88,6 +122,15 @@ public class TheatreTest {
         assertEquals(3, massey.patronSize());
         assertTrue(massey.isContainsPatron(bob));
         assertTrue(massey.isContainsPatron(shirley));
+    }
+
+    @Test
+    public void containsPatronNameTest() {
+        massey.addNewPatron(bob);
+        massey.addNewPatron(shirley);
+
+        assertTrue(massey.containsPatronName("Bob"));
+        assertTrue(massey.containsPatronName("Shirley"));
     }
 
     @Test

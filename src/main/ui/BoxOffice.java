@@ -155,8 +155,14 @@ public class BoxOffice {
     //EFFECTS: allows user to change patron name
     public void changePatronName(Patron patron) {
         System.out.println("What would you like to change the patron's name to?");
-        patron.setName(scanner.nextLine());
-        System.out.println("The patron's name is now " + patron.getName());
+        String newName = scanner.nextLine();
+        if (theatre.containsPatronName(newName)) {
+            System.out.println("That name is already taken! Lets try again.");
+            changePatronName(patron);
+        } else {
+            patron.setName(newName);
+            System.out.println("The patron's name is now " + patron.getName());
+        }
     }
 
     //MODIFIES: patron
@@ -335,8 +341,13 @@ public class BoxOffice {
         System.out.println("Here is the current title of the show: " + show.getTitle());
         System.out.println("What would you like to change the title of the show to?");
         String newTitle = scanner.nextLine();
-        show.setTitle(newTitle);
-        System.out.println("The new title of the show is: " + show.getTitle());
+        if (theatre.containsShowName(newTitle)) {
+            System.out.println("That show title is taken. Let's try again.");
+            modifyShowTitle(show);
+        } else {
+            show.setTitle(newTitle);
+            System.out.println("The new title of the show is: " + show.getTitle());
+        }
     }
 
     //MODIFIES: show
@@ -580,28 +591,27 @@ public class BoxOffice {
     public void theatreAddShow() {
         Show show = new Show();
         theatre.addNewShow(show);
-
         System.out.println("Please enter the name of the show:");
-        show.setTitle(scanner.nextLine());
-
-        theatreAddDate(show);
-
-        System.out.println("Please enter the price of the show tickets:");
-        show.setTicketPrice(parseDouble(scanner.nextLine()));
-
-
-        System.out.println("Would you like to add another show? "
-                + "(1) 'yes' or (2) 'no'. Please type the corresponding number.");
-        String temp = scanner.nextLine();
-        if (temp.equals("1")) {
+        String showTitle = scanner.nextLine();
+        if (theatre.containsShowName(showTitle)) {
+            System.out.println("That show title is taken. Let's try again.");
+            theatre.removeShow(show);
             theatreAddShow();
-        } else if (temp.equals("2")) {
-            // do nothing
         } else {
-            System.out.println("That wasn't one of the options! Going to main menu.");
-            mainMenu();
+            show.setTitle(showTitle);
+            theatreAddDate(show);
+            System.out.println("Please enter the price of the show tickets:");
+            show.setTicketPrice(parseDouble(scanner.nextLine()));
+            System.out.println("Would you like to add another show? "
+                    + "(1) 'yes' or (2) 'no'. Please type the corresponding number.");
+            String temp = scanner.nextLine();
+            if (temp.equals("1")) {
+                theatreAddShow();
+            } else if (!temp.equals("2") & !temp.equals("1")) {
+                System.out.println("That wasn't one of the options! Going to main menu.");
+                mainMenu();
+            }
         }
-
     }
 
     //MODIFIES: show
@@ -655,12 +665,20 @@ public class BoxOffice {
         theatre.addNewPatron(patron);
 
         System.out.println("What is the name of the patron?");
-        patron.setName(scanner.nextLine());
+        String patronName = scanner.nextLine();
+        if (theatre.containsPatronName(patronName)) {
+            System.out.println("That name is taken. Let's quit the program.");
+            theatre.removePatron(patron);
+            System.exit(2);
+            return null;
+        } else {
+            patron.setName(patronName);
 
-        System.out.println("What is " + patron.getName() + "'s birthday? Please enter in form MMDDYY.");
-        patron.setBirthday(parseInt(scanner.nextLine()));
+            System.out.println("What is " + patron.getName() + "'s birthday? Please enter in form MMDDYY.");
+            patron.setBirthday(parseInt(scanner.nextLine()));
 
-        return patron;
+            return patron;
+        }
     }
 
 

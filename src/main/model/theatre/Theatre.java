@@ -141,9 +141,40 @@ public class Theatre {
         return shows.isGetShow(showName);
     }
 
-    //EFFECTS: Returns a list of show names on a given date
+    //EFFECTS: returns a list of show names on a given date
     public ArrayList<String> showsOnThisDate(String date) {
         return shows.onThisDate(date);
     }
 
+    //EFFECTS: removes a show from upcoming and past show lists
+    public void removeShow(Show show) {
+        shows.removeShow(show);
+    }
+
+    //EFFECTS: returns true if a name of a patron is already in the system, false otherwise
+    public boolean containsPatronName(String patronName) {
+        Boolean x = false;
+        for (String name: this.getPatronNames()) {
+            if (patronName.equals(name)) {
+                x = true;
+            }
+        }
+        return x;
+    }
+
+    //EFFECTS: returns true if a name of a show is already in the system, false otherwise
+    public boolean containsShowName(String showName) {
+        Boolean x = false;
+        for (String name: this.getPastShowNames()) {
+            if (showName.equals(name)) {
+                x = true;
+            }
+        }
+        for (String name: this.getUpcomingShowNames()) {
+            if (showName.equals(name)) {
+                x = true;
+            }
+        }
+        return x;
+    }
 }
