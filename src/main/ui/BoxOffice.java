@@ -304,16 +304,12 @@ public class BoxOffice {
 
 
     //EFFECTS: Lets user choose which show's information they would like to change
-    @SuppressWarnings("methodlength")
     public void changeSpecificShow() {
-        System.out.println("Here is the list of upcoming and past shows: " + theatre.getUpcomingShowNames()
-                + theatre.getPastShowNames());
-        System.out.println("Which show's info would you like to modify?");
+        upcomingAndPastShowsModifyIntro();
         String input = scanner.nextLine();
         if (theatre.isGetTheatreShow(input)) {
             Show show = theatre.getShow(input);
-            System.out.println("Which info would you like to modify? (1) title, (2) dates, (3) patrons, "
-                    + "(4) ticket price, (5) nothing (go back to main menu)");
+            whichShowInfoToModify();
             String temp = scanner.nextLine();
             if (temp.equals("1")) {
                 modifyShowTitle(show);
@@ -330,10 +326,23 @@ public class BoxOffice {
                 mainMenu();
             }
         } else {
-            System.out.println("That show is not in our system yet. Let's go to the main menu.");
-            mainMenu();
+            System.out.println("That show is not in our system yet.");
         }
     }
+
+    //EFFECTS: introduces the change specific show method
+    public void upcomingAndPastShowsModifyIntro() {
+        System.out.println("Here is the list of upcoming and past shows: " + theatre.getUpcomingShowNames()
+                + theatre.getPastShowNames());
+        System.out.println("Which show's info would you like to modify?");
+    }
+
+    //EFFECTS: options for user to choose which show info to modify
+    public void whichShowInfoToModify() {
+        System.out.println("Which info would you like to modify? (1) title, (2) dates, (3) patrons, "
+                + "(4) ticket price, (5) nothing (go back to main menu)");
+    }
+
 
     //MODIFIES: show
     //EFFECTS: lets user modify show title
