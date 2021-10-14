@@ -43,11 +43,15 @@ public class ShowListTest {
         assertTrue(showList.isContainedInUpcoming(singingInTheRain));
 
         showList.removeShow(beautyAndTheBeast);
+        showList.archive(cabaret);
         showList.archive(singingInTheRain);
         showList.removeShow(singingInTheRain);
 
-        assertEquals(1, showList.getUpcomingShowsSize());
-        assertEquals(0, showList.getPastShowsSize());
+        Show blab = new Show();
+        showList.removeShow(blab);
+
+        assertEquals(0, showList.getUpcomingShowsSize());
+        assertEquals(1, showList.getPastShowsSize());
         assertFalse(showList.isContainedInUpcoming(beautyAndTheBeast));
         assertFalse(showList.isContainedInUpcoming(singingInTheRain));
 
