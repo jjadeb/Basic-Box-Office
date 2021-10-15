@@ -9,10 +9,12 @@ import java.util.Scanner;
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
+//This class references code from SimpleCalculatorSolutionLecLab
+//link: https://github.students.cs.ubc.ca/CPSC210/B04-SimpleCalculatorSolutionLecLab.git
 //This is where all the nitty gritty of the user code is
 public class BoxOffice {
 
-    private Scanner scanner; //some structure and code for the scanner taken from SimpleCalculatorSolutionLecLab
+    private Scanner scanner;
     private Theatre theatre = new Theatre();
 
     //EFFECTS: constructs a box office
