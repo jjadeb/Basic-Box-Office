@@ -110,6 +110,7 @@ public class TheatreTest {
         assertFalse(bob.isContainedInMyUpcomingShows(legallyBlonde));
         assertTrue(bob.isContainedInMyPastShows(legallyBlonde));
         assertTrue(shirley.isContainedInMyUpcomingShows(cabaret));
+        assertTrue(massey.getPastShows().contains(legallyBlonde));
 
     }
 
@@ -120,8 +121,10 @@ public class TheatreTest {
         massey.addNewPatron(bob);
 
         assertEquals(3, massey.patronSize());
+        assertEquals(3, massey.getPatrons().getSize());
         assertTrue(massey.isContainsPatron(bob));
         assertTrue(massey.isContainsPatron(shirley));
+        assertEquals(3, massey.getPatrons().getSize());
     }
 
     @Test

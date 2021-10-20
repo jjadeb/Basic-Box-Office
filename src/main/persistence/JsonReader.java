@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.stream.Stream;
 
+import model.people.Patron;
+import model.shows.Show;
 import model.theatre.Theatre;
 import org.json.*;
 
@@ -43,7 +46,128 @@ public class JsonReader {
     // EFFECTS: parses theatre from JSON object and returns it
     private Theatre parseTheatre(JSONObject jsonObject) {
         Theatre theatre = new Theatre();
+        addName(theatre, jsonObject);
+        addShows(theatre, jsonObject);
+        addPatrons(theatre, jsonObject);
         return theatre;
+    }
+
+    // MODIFIES: theatre
+    // EFFECTS: parses patrons from JSON object and adds them to theatre
+    private void addPatrons(Theatre theatre, JSONObject jsonObject) {
+        JSONArray jsonArray = jsonObject.getJSONArray("patrons");
+        for (Object json : jsonArray) {
+            JSONObject nextPatron = (JSONObject) json;
+            addPatron(theatre, nextPatron);
+        }
+    }
+
+    // MODIFIES: theatre
+    // EFFECTS: parses patron from JSON object and adds it to theatre
+    private void addPatron(Theatre theatre, JSONObject jsonObject) {
+        Patron patron = new Patron();
+
+        String name = jsonObject.getString("name");
+        patron.setName(name);
+
+        int birthday = jsonObject.getInt("birthday");
+        patron.setBirthday(birthday);
+
+        JSONArray jsonArray = jsonObject.getJSONArray("patronShows");
+        for (Object json : jsonArray) {
+            JSONObject nextPatronShow = (JSONObject) json;
+            addPatronShow(patron, nextPatronShow, theatre);
+        }
+        theatre.addNewPatron(patron);
+    }
+
+    //MODIFIES: patron, show
+    //EFFECTS: parses show from JSON object and adds it to patron, adds patron to show
+    private void addPatronShow(Patron patron, JSONObject jsonObject, Theatre theatre) {
+        String name = jsonObject.getString("show");
+        Show show = theatre.getShow(name);
+        patron.addShow(show);
+        show.addPatron(patron);
+    }
+
+    // MODIFIES: show
+    // EFFECTS: parses date from JSON object and adds it to show
+    private void addShowDate(Show show, JSONObject jsonObject) {
+        String date = jsonObject.getString("date");
+        show.addDate(date);
+    }
+
+
+
+    // MODIFIES: theatre
+    // EFFECTS: parses shows from JSON object and adds them to theatre
+    private void addShows(Theatre theatre, JSONObject jsonObject) {
+        JSONArray jsonArray = jsonObject.getJSONArray("shows");
+        for (Object json : jsonArray) {
+            JSONObject showsType = (JSONObject) json;
+            addUpcomingAndPastShows(theatre, showsType);
+        }
+    }
+
+    // MODIFIES: theatre
+    // EFFECTS: parses shows from JSON object and adds them to theatre
+    private void addUpcomingAndPastShows(Theatre theatre, JSONObject jsonObject) {
+        JSONArray jsonArray = jsonObject.getJSONArray("upcoming");
+        for (Object json : jsonArray) {
+            JSONObject nextShow = (JSONObject) json;
+            addUpcomingShow(theatre, nextShow);
+        }
+        JSONArray jsonArray2 = jsonObject.getJSONArray("past");
+        for (Object json : jsonArray2) {
+            JSONObject nextShow = (JSONObject) json;
+            addPastShow(theatre, nextShow);
+        }
+    }
+
+    // MODIFIES: theatre
+    // EFFECTS: parses show from JSON object and adds it to theatre
+    private void addUpcomingShow(Theatre theatre, JSONObject jsonObject) {
+        Show show = new Show();
+        String name = jsonObject.getString("title");
+        show.setTitle(name);
+        Double price = jsonObject.getDouble("ticketPrice");
+        show.setTicketPrice(price);
+
+        JSONArray jsonArray = jsonObject.getJSONArray("dates");
+        for (Object json : jsonArray) {
+            JSONObject nextDate = (JSONObject) json;
+            addShowDate(show, nextDate);
+        }
+       //addPatronShow adds the patron to the show, so we don't need to do it here
+
+        theatre.addNewShow(show);
+    }
+
+    // MODIFIES: theatre
+    // EFFECTS: parses show from JSON object and adds it to theatre
+    private void addPastShow(Theatre theatre, JSONObject jsonObject) {
+        Show show = new Show();
+        String name = jsonObject.getString("title");
+        show.setTitle(name);
+        Double price = jsonObject.getDouble("ticketPrice");
+        show.setTicketPrice(price);
+
+        JSONArray jsonArray = jsonObject.getJSONArray("dates");
+        for (Object json : jsonArray) {
+            JSONObject nextDate = (JSONObject) json;
+            addShowDate(show, nextDate);
+        }
+        //addPatronShow adds the patron to the show, so we don't need to do it here
+
+        theatre.addNewShow(show);
+        theatre.archiveShow(show);
+    }
+
+    // MODIFIES: theatre
+    // EFFECTS: parses name from JSON object and adds it to theatre
+    private void addName(Theatre theatre, JSONObject jsonObject) {
+        String name = jsonObject.getString("name");
+        theatre.setName(name);
     }
 }
 

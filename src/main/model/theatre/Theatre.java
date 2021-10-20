@@ -89,6 +89,11 @@ public class Theatre {
         return shows.getPastShowsSize();
     }
 
+    //EFFECTS: returns the list of patrons
+    public PatronList getPatrons() {
+        return patrons;
+    }
+
     //EFFECTS: returns the names of upcoming shows
     public ArrayList<String> getUpcomingShowNames() {
         return shows.getUpcomingShowNames();
@@ -102,6 +107,11 @@ public class Theatre {
     //EFFECTS: returns upcoming shows
     public ArrayList<Show> getUpcomingShows() {
         return shows.getUpcomingShows();
+    }
+
+    //EFFECTS: returns past shows
+    public ArrayList<Show> getPastShows() {
+        return shows.getPastShows();
     }
 
     //EFFECTS: retrieves patron from a theatre's list of patrons
