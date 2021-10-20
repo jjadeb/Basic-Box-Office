@@ -1,6 +1,8 @@
 package model.shows;
 
 
+import model.people.Patron;
+
 import java.util.ArrayList;
 
 // Represents a record of a patron's or theatre's upcoming shows and past shows
@@ -23,8 +25,8 @@ public class ShowList {
     }
 
 
-    //MODIFIES: this
-    //EFFECTS: removes a show from upcoming shows and adds it to past shows
+    //MODIFIES: this, patron
+    //EFFECTS: removes a show from theatres + patrons upcoming shows and adds it to their past shows
     public void archive(Show show) {
         upcomingShows.remove(show);
         pastShows.add(show);

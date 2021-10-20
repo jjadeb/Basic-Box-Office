@@ -115,10 +115,10 @@ public class Theatre {
     }
 
     //EFFECTS: retrieves patron from a theatre's list of patrons
-    public Patron getPatron(String name, Integer birthday) {
+    public Patron getPatron(String name, String birthday) {
         Patron find = null;
         for (Patron patron : patrons.getPatronList()) {
-            if (patron.getName().equals(name) && (patron.getBirthday() == birthday)) {
+            if (patron.getName().equals(name) && (patron.getBirthday().equals(birthday))) {
                 find = patron;
             }
         }
@@ -136,7 +136,7 @@ public class Theatre {
     }
 
     //EFFECTS: returns true if a patron is in the records
-    public boolean isGetTheatrePatron(String patronName, Integer patronBirthday) {
+    public boolean isGetTheatrePatron(String patronName, String patronBirthday) {
         return (!(getPatron(patronName, patronBirthday) == null));
     }
 

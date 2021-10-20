@@ -171,7 +171,7 @@ public class BoxOffice {
     //EFFECTS: allows user to change patron birthday
     public void changePatronBirthday(Patron patron) {
         System.out.println("What would you like to change the patron's birthday to? Please enter in form MMDDYY");
-        patron.setBirthday(parseInt(scanner.nextLine()));
+        patron.setBirthday(scanner.nextLine());
         System.out.println("The patron's birthday is now " + patron.getBirthday());
     }
 
@@ -570,7 +570,7 @@ public class BoxOffice {
             System.out.println("What is the patrons name?");
             String name = scanner.nextLine();
             System.out.println("What is the patrons birthday? Enter in format MMDDYY.");
-            Integer birthday = parseInt(scanner.nextLine());
+            String birthday = scanner.nextLine();
             if (theatre.getPatron(name, birthday) == null) {
                 System.out.println("That patron is not in our system yet. Let's set up an account for them!");
                 patron = theatreAddPatron();
@@ -686,7 +686,7 @@ public class BoxOffice {
             patron.setName(patronName);
 
             System.out.println("What is " + patron.getName() + "'s birthday? Please enter in form MMDDYY.");
-            patron.setBirthday(parseInt(scanner.nextLine()));
+            patron.setBirthday(scanner.nextLine());
 
             return patron;
         }

@@ -62,11 +62,14 @@ public class JsonReaderTest extends JsonTest {
             Theatre theatre = reader.read();
             ArrayList<Show> upcomingShows = theatre.getUpcomingShows();
             assertEquals(1, upcomingShows.size());
+            assertTrue(theatre.isUpcomingShow(theatre.getShow("Almost, Maine")));
 
             ArrayList almostDates = new ArrayList();
             almostDates.add("090825");
             almostDates.add("120221");
-            checkShow("Almost, Maine", almostDates, upcomingShows.get(0).getPatrons(),
+            PatronList almostPatrons = new PatronList();
+            almostPatrons.addNewPatron(theatre.getPatron("Shirley", "050412"));
+            checkShow("Almost, Maine", almostDates, almostPatrons,
                     15, upcomingShows.get(0));
         } catch (IOException e) {
             fail("Couldn't read from file");
@@ -81,16 +84,22 @@ public class JsonReaderTest extends JsonTest {
             ArrayList<Show> pastShows = theatre.getPastShows();
             assertEquals(2, pastShows.size());
 
+
             ArrayList cabDates = new ArrayList();
             cabDates.add("090821");
             cabDates.add("120221");
-            checkShow("Cabaret", cabDates, pastShows.get(0).getPatrons(),
+            PatronList cabPatrons = new PatronList();
+            cabPatrons.addNewPatron(theatre.getPatron("Bob", "050402"));
+            cabPatrons.addNewPatron(theatre.getPatron("Shirley", "050412"));
+            checkShow("Cabaret", cabDates, cabPatrons,
                     7, pastShows.get(0));
 
             ArrayList blahDates = new ArrayList();
             blahDates.add("090830");
             blahDates.add("120219");
-            checkShow("Blah", blahDates, pastShows.get(1).getPatrons(),
+            PatronList blahPatrons = new PatronList();
+            blahPatrons.addNewPatron(theatre.getPatron("Bob", "050402"));
+            checkShow("Blah", blahDates, blahPatrons,
                     4, pastShows.get(1));
         } catch (IOException e) {
             fail("Couldn't read from file");
@@ -105,10 +114,11 @@ public class JsonReaderTest extends JsonTest {
             PatronList patrons = theatre.getPatrons();
             assertEquals(2, patrons.getPatronList().size());
 
-            checkPatron("Bob", patrons.getPatronList().get(0).getMyShows(), 050402,
+
+            checkPatron("Bob", patrons.getPatronList().get(0).getMyShows(), "050402",
                     patrons.getPatronList().get(0));
 
-            checkPatron("Shirley", patrons.getPatronList().get(1).getMyShows(), 050412,
+            checkPatron("Shirley", patrons.getPatronList().get(1).getMyShows(), "050412",
                     patrons.getPatronList().get(1));
 
         } catch (IOException e) {

@@ -29,10 +29,10 @@ class PatronTest {
     @Test
 
     public void makePatronTest() {
-        bob.setBirthday(012304);
+        bob.setBirthday("012304");
         bob.setName("Bob");
         assertEquals("Bob", bob.getName());
-        assertEquals(012304, bob.getBirthday());
+        assertEquals("012304", bob.getBirthday());
     }
 
     @Test

@@ -188,15 +188,15 @@ public class TheatreTest {
         massey.addNewPatron(bob);
         massey.addNewPatron(shirley);
 
-        bob.setBirthday(050402);
+        bob.setBirthday("050402");
         bob.setName("Bob");
 
-        shirley.setBirthday(050402);
+        shirley.setBirthday("050402");
         shirley.setName("Shirley");
 
-        assertEquals(bob, massey.getPatron("Bob", 050402));
-        assertTrue(massey.isGetTheatrePatron("Bob", 050402));
-        assertFalse(massey.isGetTheatrePatron("Shirley", 050403));
+        assertEquals(bob, massey.getPatron("Bob", "050402"));
+        assertTrue(massey.isGetTheatrePatron("Bob", "050402"));
+        assertFalse(massey.isGetTheatrePatron("Shirley", "050403"));
     }
 
     @Test
@@ -205,13 +205,13 @@ public class TheatreTest {
         massey.addNewPatron(bob);
         massey.addNewPatron(shirley);
 
-        bob.setBirthday(050401);
+        bob.setBirthday("050401");
         bob.setName("Shirley");
 
-        shirley.setBirthday(050402);
+        shirley.setBirthday("050402");
         shirley.setName("Shirley");
 
-        assertEquals(bob, massey.getPatron("Shirley", 050401));
+        assertEquals(bob, massey.getPatron("Shirley", "050401"));
     }
 
     @Test
@@ -220,13 +220,13 @@ public class TheatreTest {
         massey.addNewPatron(bob);
         massey.addNewPatron(shirley);
 
-        bob.setBirthday(050401);
+        bob.setBirthday("050401");
         bob.setName("Shirley");
 
-        shirley.setBirthday(050401);
+        shirley.setBirthday("050401");
         shirley.setName("Shirley");
 
-        assertEquals(shirley, massey.getPatron("Shirley", 050401));
+        assertEquals(shirley, massey.getPatron("Shirley", "050401"));
 
     }
 
@@ -236,13 +236,13 @@ public class TheatreTest {
         massey.addNewPatron(bob);
         massey.addNewPatron(shirley);
 
-        bob.setBirthday(050401);
+        bob.setBirthday("050401");
         bob.setName("Bob");
 
-        shirley.setBirthday(050402);
+        shirley.setBirthday("050402");
         shirley.setName("Shirley");
 
-        assertEquals(null, massey.getPatron("Shirley", 050405));
+        assertEquals(null, massey.getPatron("Shirley", "050405"));
 
     }
 
@@ -252,13 +252,13 @@ public class TheatreTest {
         massey.addNewPatron(bob);
         massey.addNewPatron(shirley);
 
-        bob.setBirthday(050401);
+        bob.setBirthday("050401");
         bob.setName("Bob");
 
-        shirley.setBirthday(050402);
+        shirley.setBirthday("050402");
         shirley.setName("Shirley");
 
-        assertNull(massey.getPatron("Cat", 050401));
+        assertNull(massey.getPatron("Cat", "050401"));
 
     }
 
@@ -268,13 +268,13 @@ public class TheatreTest {
         massey.addNewPatron(bob);
         massey.addNewPatron(shirley);
 
-        bob.setBirthday(050401);
+        bob.setBirthday("050401");
         bob.setName("Bob");
 
-        shirley.setBirthday(050402);
+        shirley.setBirthday("050402");
         shirley.setName("Shirley");
 
-        assertNull(massey.getPatron("Cat", 050454));
+        assertNull(massey.getPatron("Cat", "050454"));
 
     }
 

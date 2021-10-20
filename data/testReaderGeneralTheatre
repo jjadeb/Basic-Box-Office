@@ -3,7 +3,8 @@
     {
       "name": "Bob",
       "birthday": "050402",
-      "patronShows": [
+      "patronUpcomingShows": [],
+      "patronPastShows": [
         {
           "show": "Cabaret"
         },
@@ -15,9 +16,14 @@
     {
       "name": "Shirley",
       "birthday": "050412",
-      "patronShows": [
+      "patronUpcomingShows": [
         {
           "show": "Almost, Maine"
+        }
+      ],
+      "patronPastShows": [
+        {
+          "show": "Cabaret"
         }
       ]
     }
@@ -27,10 +33,6 @@
       "upcoming": [
         {
           "showPatrons": [
-            {
-              "name": "Shirley",
-              "birthday": "050412"
-            }
           ],
           "dates": [
             {
@@ -47,14 +49,6 @@
       "past": [
         {
           "showPatrons": [
-            {
-              "name": "Shirley",
-              "birthday": "050412"
-            },
-            {
-              "name": "Bob",
-              "birthday": "050402"
-            }
           ],
           "dates": [
             {
@@ -69,10 +63,6 @@
         },
         {
           "showPatrons": [
-            {
-              "name": "Bob",
-              "birthday": "050402"
-            }
           ],
           "dates": [
             {

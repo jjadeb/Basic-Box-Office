@@ -9,6 +9,7 @@ import model.shows.ShowList;
 
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //This class copies code from JsonSerializationDemo
@@ -18,11 +19,11 @@ public class JsonTest {
                              double ticketPrice, Show show) {
         assertEquals(name, show.getTitle());
         assertEquals(dates, show.getDates());
-        assertEquals(patrons, show.getPatrons());
+        assertTrue(patrons.getPatronList().containsAll(show.getPatrons().getPatronList()));
         assertEquals(ticketPrice, show.getTicketPrice());
     }
 
-    protected void checkPatron(String name, ShowList shows, double birthday, Patron patron) {
+    protected void checkPatron(String name, ShowList shows, String birthday, Patron patron) {
         assertEquals(name, patron.getName());
         assertEquals(birthday, patron.getBirthday());
         assertEquals(shows, patron.getMyShows());

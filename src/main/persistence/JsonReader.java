@@ -70,24 +70,42 @@ public class JsonReader {
         String name = jsonObject.getString("name");
         patron.setName(name);
 
-        int birthday = jsonObject.getInt("birthday");
+        String birthday = jsonObject.getString("birthday");
         patron.setBirthday(birthday);
 
-        JSONArray jsonArray = jsonObject.getJSONArray("patronShows");
+        JSONArray jsonArray = jsonObject.getJSONArray("patronUpcomingShows");
         for (Object json : jsonArray) {
-            JSONObject nextPatronShow = (JSONObject) json;
-            addPatronShow(patron, nextPatronShow, theatre);
+            JSONObject nextShow = (JSONObject) json;
+            addUpcomingShowPatron(patron, nextShow, theatre);
+        }
+        JSONArray jsonArray2 = jsonObject.getJSONArray("patronPastShows");
+        for (Object json : jsonArray2) {
+            JSONObject nextShow = (JSONObject) json;
+            addPastShowPatron(patron, nextShow, theatre);
         }
         theatre.addNewPatron(patron);
     }
 
+
+
+
     //MODIFIES: patron, show
-    //EFFECTS: parses show from JSON object and adds it to patron, adds patron to show
-    private void addPatronShow(Patron patron, JSONObject jsonObject, Theatre theatre) {
+    //EFFECTS: parses upcoming show from JSON object and adds it to patron, adds patron to show
+    private void addUpcomingShowPatron(Patron patron, JSONObject jsonObject, Theatre theatre) {
         String name = jsonObject.getString("show");
         Show show = theatre.getShow(name);
         patron.addShow(show);
         show.addPatron(patron);
+    }
+
+    //MODIFIES: patron, show
+    //EFFECTS: parses past show from JSON object and adds it to patron,
+    private void addPastShowPatron(Patron patron, JSONObject jsonObject, Theatre theatre) {
+        String name = jsonObject.getString("show");
+        Show show = theatre.getShow(name);
+        patron.addShow(show);
+        show.addPatron(patron);
+        patron.getMyShows().archive(show);
     }
 
     // MODIFIES: show

@@ -11,14 +11,14 @@ import java.util.ArrayList;
 public class Patron {
 
     String name;
-    int birthday;
+    String birthday;
     ShowList myShows;
 
     //EFFECTS: constructs a patron
     public Patron() {
         myShows = new ShowList();
         name = "";
-        birthday = 111111;
+        birthday = "";
     }
 
     //MODIFIES: this
@@ -59,7 +59,7 @@ public class Patron {
         this.name = name;
     }
 
-    public void setBirthday(int birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
@@ -67,7 +67,7 @@ public class Patron {
         return name;
     }
 
-    public int getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
