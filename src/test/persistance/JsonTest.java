@@ -23,9 +23,11 @@ public class JsonTest {
         assertEquals(ticketPrice, show.getTicketPrice());
     }
 
-    protected void checkPatron(String name, ShowList shows, String birthday, Patron patron) {
+    protected void checkPatron(String name, ArrayList<Show> upcomingShows, ArrayList<Show> pastShows, String birthday,
+                               Patron patron) {
         assertEquals(name, patron.getName());
         assertEquals(birthday, patron.getBirthday());
-        assertEquals(shows, patron.getMyShows());
+        assertTrue(upcomingShows.containsAll(patron.getMyShows().getUpcomingShows()));
+        assertTrue(pastShows.containsAll(patron.getMyShows().getPastShows()));
     }
 }

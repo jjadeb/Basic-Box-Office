@@ -4,6 +4,8 @@ import model.people.Patron;
 import model.people.PatronList;
 import model.shows.Show;
 import model.shows.ShowList;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -186,5 +188,57 @@ public class Theatre {
             }
         }
         return x;
+    }
+
+    //EFFECTS: puts theatre info into a json object
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("patrons", patronsToJson());
+        json.put("upcoming", upcomingShowsToJson());
+        json.put("past", pastShowsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns patrons in this theatre as a JSON array
+    private JSONArray patronsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Patron p : patrons.getPatronList()) {
+            jsonArray.put(p.toJson());
+        }
+
+        return jsonArray;
+    }
+
+//    // EFFECTS: returns shows in this theatre as a JSON array
+//    private JSONObject showsToJson() {
+//        JSONObject json = new JSONObject();
+//        json.put("upcoming", upcomingShowsToJson());
+//        json.put("past", pastShowsToJson());
+//
+//        return json;
+//    }
+
+    // EFFECTS: returns upcoming shows as a JSON array
+    private JSONArray upcomingShowsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Show s : shows.getUpcomingShows()) {
+            jsonArray.put(s.toJson());
+        }
+
+        return jsonArray;
+    }
+
+    // EFFECTS: returns past shows as a JSON array
+    private JSONArray pastShowsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Show s : shows.getPastShows()) {
+            jsonArray.put(s.toJson());
+        }
+
+        return jsonArray;
     }
 }

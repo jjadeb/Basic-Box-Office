@@ -2,6 +2,8 @@ package model.shows;
 
 import model.people.Patron;
 import model.people.PatronList;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -96,5 +98,34 @@ public class Show {
         return patronNames;
     }
 
+    //EFFECTS: Returns patron show as a json object
+    public JSONObject toJsonPatron() {
+        JSONObject json = new JSONObject();
+        json.put("show", title);
+        return json;
+    }
+
+    //EFFECTS: returns show as a json object
+    public JSONObject toJson() {
+        PatronList emptyPatrons = new PatronList();
+        JSONObject json = new JSONObject();
+        json.put("title", title);
+        json.put("ticketPrice", ticketPrice);
+        json.put("dates", datesToJson());
+        json.put("showPatrons", emptyPatrons);
+        return json;
+    }
+
+    // EFFECTS: returns dates in a show as a JSON array
+    private JSONArray datesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (String d : dates) {
+            JSONObject json = new JSONObject();
+            json.put("date", d);
+            jsonArray.put(json);
+        }
+        return jsonArray;
+    }
 
 }

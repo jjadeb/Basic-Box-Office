@@ -47,7 +47,8 @@ public class JsonReader {
     private Theatre parseTheatre(JSONObject jsonObject) {
         Theatre theatre = new Theatre();
         addName(theatre, jsonObject);
-        addShows(theatre, jsonObject);
+        addUpcomingShows(theatre, jsonObject);
+        addPastShows(theatre, jsonObject);
         addPatrons(theatre, jsonObject);
         return theatre;
     }
@@ -117,24 +118,20 @@ public class JsonReader {
 
 
 
-    // MODIFIES: theatre
-    // EFFECTS: parses shows from JSON object and adds them to theatre
-    private void addShows(Theatre theatre, JSONObject jsonObject) {
-        JSONArray jsonArray = jsonObject.getJSONArray("shows");
-        for (Object json : jsonArray) {
-            JSONObject showsType = (JSONObject) json;
-            addUpcomingAndPastShows(theatre, showsType);
-        }
-    }
 
     // MODIFIES: theatre
     // EFFECTS: parses shows from JSON object and adds them to theatre
-    private void addUpcomingAndPastShows(Theatre theatre, JSONObject jsonObject) {
+    private void addUpcomingShows(Theatre theatre, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("upcoming");
         for (Object json : jsonArray) {
             JSONObject nextShow = (JSONObject) json;
             addUpcomingShow(theatre, nextShow);
         }
+    }
+
+    // MODIFIES: theatre
+    // EFFECTS: parses shows from JSON object and adds them to theatre
+    private void addPastShows(Theatre theatre, JSONObject jsonObject) {
         JSONArray jsonArray2 = jsonObject.getJSONArray("past");
         for (Object json : jsonArray2) {
             JSONObject nextShow = (JSONObject) json;

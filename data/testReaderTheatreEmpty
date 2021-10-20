@@ -1,10 +1,6 @@
 {
   "patrons": [],
-  "shows": [
-    {
-      "upcoming": [],
-      "past": []
-    }
-  ],
+  "upcoming": [],
+  "past": [],
   "name": "Massey Theatre"
 }

@@ -114,11 +114,18 @@ public class JsonReaderTest extends JsonTest {
             PatronList patrons = theatre.getPatrons();
             assertEquals(2, patrons.getPatronList().size());
 
-
-            checkPatron("Bob", patrons.getPatronList().get(0).getMyShows(), "050402",
+            ArrayList<Show> bobsUpcomingShows = new ArrayList<>();
+            ArrayList<Show> bobsPastShows = new ArrayList<>();
+            bobsPastShows.add(theatre.getShow("Cabaret"));
+            bobsPastShows.add(theatre.getShow("Blah"));
+            checkPatron("Bob", bobsUpcomingShows, bobsPastShows, "050402",
                     patrons.getPatronList().get(0));
 
-            checkPatron("Shirley", patrons.getPatronList().get(1).getMyShows(), "050412",
+            ArrayList<Show> shirleysUpcomingShows = new ArrayList<>();
+            ArrayList<Show> shirleysPastShows = new ArrayList<>();
+            shirleysPastShows.add(theatre.getShow("Cabaret"));
+            shirleysUpcomingShows.add(theatre.getShow("Almost, Maine"));
+            checkPatron("Shirley", shirleysUpcomingShows, shirleysPastShows, "050412",
                     patrons.getPatronList().get(1));
 
         } catch (IOException e) {

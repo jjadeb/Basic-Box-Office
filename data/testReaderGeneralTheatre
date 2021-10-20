@@ -28,54 +28,50 @@
       ]
     }
   ],
-  "shows": [
+  "upcoming": [
     {
-      "upcoming": [
-        {
-          "showPatrons": [
-          ],
-          "dates": [
-            {
-              "date": "090825"
-            },
-            {
-              "date": "120221"
-            }
-          ],
-          "title": "Almost, Maine",
-          "ticketPrice": 15
-        }
+      "showPatrons": [
       ],
-      "past": [
+      "dates": [
         {
-          "showPatrons": [
-          ],
-          "dates": [
-            {
-              "date": "090821"
-            },
-            {
-              "date": "120221"
-            }
-          ],
-          "title": "Cabaret",
-          "ticketPrice": 7
+          "date": "090825"
         },
         {
-          "showPatrons": [
-          ],
-          "dates": [
-            {
-              "date": "090830"
-            },
-            {
-              "date": "120219"
-            }
-          ],
-          "title": "Blah",
-          "ticketPrice": 4
+          "date": "120221"
         }
-      ]
+      ],
+      "title": "Almost, Maine",
+      "ticketPrice": 15
+    }
+  ],
+  "past": [
+    {
+      "showPatrons": [
+      ],
+      "dates": [
+        {
+          "date": "090821"
+        },
+        {
+          "date": "120221"
+        }
+      ],
+      "title": "Cabaret",
+      "ticketPrice": 7
+    },
+    {
+      "showPatrons": [
+      ],
+      "dates": [
+        {
+          "date": "090830"
+        },
+        {
+          "date": "120219"
+        }
+      ],
+      "title": "Blah",
+      "ticketPrice": 4
     }
   ],
   "name": "Massey Theatre"

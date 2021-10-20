@@ -4,6 +4,8 @@ package model.people;
 import model.shows.Show;
 
 import model.shows.ShowList;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -84,6 +86,41 @@ public class Patron {
     public ArrayList<String> myPastShowNames() {
         return myShows.getPastShowNames();
     }
+
+    //EFFECTS: Gets patron information to put in Json
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("birthday", birthday);
+        json.put("patronUpcomingShows", patronUpcomingShowsToJson());
+        json.put("patronPastShows", patronPastShowsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in the patron's upcoming shows as a JSON array
+    private JSONArray patronUpcomingShowsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Show s : myShows.getUpcomingShows()) {
+            jsonArray.put(s.toJsonPatron());
+        }
+
+        return jsonArray;
+    }
+
+    // EFFECTS: returns things in the patron's past shows as a JSON array
+    private JSONArray patronPastShowsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Show s : myShows.getPastShows()) {
+            jsonArray.put(s.toJsonPatron());
+        }
+
+        return jsonArray;
+    }
+
+
 
 }
 
