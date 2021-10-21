@@ -3,7 +3,11 @@ package ui;
 import model.people.Patron;
 import model.shows.Show;
 import model.theatre.Theatre;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 import static java.lang.Double.parseDouble;
@@ -20,6 +24,7 @@ public class BoxOffice {
     //EFFECTS: constructs a box office
     public BoxOffice() {
         scanner = new Scanner(System.in);
+        readIn();
         if (theatre.getName().equals("")) {
             setUp();
         }
@@ -52,12 +57,37 @@ public class BoxOffice {
         } else if (response.equals("2")) {
             theatreInformation();
         }  else if (response.equals("3")) {
+            writeOut();
             System.exit(1);
         } else {
             System.out.println("That wasn't one of the options! Let's see them again.");
             mainMenu();
         }
         end();
+    }
+
+    //MODIFIES: theatre
+    //EFFECTS: reads in theatre data
+    public void readIn() {
+        JsonReader reader = new JsonReader("./data/theatre");
+        try {
+            theatre = reader.read();
+        } catch (IOException e) {
+            System.out.println("Information not able to be loaded.");
+        }
+    }
+
+    //EFFECTS: saves theatre data
+    public void writeOut() {
+        JsonWriter writer = new JsonWriter("./data/theatre");
+        try {
+            writer.open();
+        } catch (FileNotFoundException e) {
+            System.out.println("Information not able to be saved");;
+        }
+        writer.write(theatre);
+        writer.close();
+        System.out.println("Information has been saved!");
     }
 
 
@@ -500,6 +530,7 @@ public class BoxOffice {
         System.out.println("Would you like to (1) quit or (2) go to the main menu?");
         String temp = scanner.nextLine();
         if (temp.equals("1")) {
+            writeOut();
             System.exit(1);
         } else {
             mainMenu();
@@ -680,6 +711,7 @@ public class BoxOffice {
         if (theatre.containsPatronName(patronName)) {
             System.out.println("That name is taken. Let's quit the program.");
             theatre.removePatron(patron);
+            writeOut();
             System.exit(2);
             return null;
         } else {
