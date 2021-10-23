@@ -1,11 +1,6 @@
 {
-    "past": [],
-    "name": "Massey",
-    "patrons": [],
-    "upcoming": [{
-        "showPatrons": "model.people.PatronList@312b1dae",
-        "ticketPrice": 6,
-        "dates": [{"date": "060708"}],
-        "title": "massey"
-    }]
+  "patrons": [],
+  "upcoming": [],
+  "past": [],
+  "name": ""
 }
