@@ -1,7 +1,6 @@
 package ui;
 
-import com.sun.javafx.binding.StringFormatter;
-import model.shows.Show;
+import model.people.Patron;
 import model.theatre.Theatre;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -11,11 +10,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.NumberFormat;
 
 //Class references code from Phase 3 Description (Swing JLable text change)
 //url: https://stackoverflow.com/questions/6578205/swing-jlabel-text-change-
@@ -31,34 +27,30 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
     private Theatre theatre;
     private JButton loadButton;
     private JButton saveButton;
-    private JButton addShowButton;
-    private JButton removeShowButton;
+    private JButton addPatronButton;
+    private JButton removePatronButton;
     private JButton finishAdd;
 
-    //add show labels (from FormattedTextFieldDemo.java)
-    private JLabel showNameLabel;
-    private JLabel showPriceLabel;
-    private JLabel addShowDateLabel;
-    private JLabel showList;
+    //add patron labels (from FormattedTextFieldDemo.java)
+    private JLabel patronNameLabel;
+    private JLabel patronBirthdayLabel;
+    private JLabel patronList;
 
-    //add show text fields
-    private JFormattedTextField showName;
-    private JFormattedTextField showPrice;
-    private JFormattedTextField showDate;
+    //add patron text fields
+    private JFormattedTextField patronName;
+    private JFormattedTextField patronBirthday;
 
-    //Formats to format
-    private NumberFormat amountFormat;
-    private StringFormatter stringFormatter;
 
     //Panels
     JPanel labelPane;
     JPanel fieldPane;
+    JPanel patronPane;
 
 
     public BoxOfficeGUI() {
         super("Box Office");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(500, 300));
+        setPreferredSize(new Dimension(700, 300));
         ((JPanel) getContentPane()).setBorder(new EmptyBorder(13, 13, 13, 13));
         setLayout(new FlowLayout());
         loadButton = new JButton("Load Information");
@@ -81,27 +73,32 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
             mainMenu();
         } else if (e.getActionCommand().equals("save")) {
             writeOut();
-        } else if (e.getActionCommand().equals("addShow")) {
-            addShow();
-        } else if (e.getActionCommand().equals("removeShow")) {
-            // TODO: removeShow();
+        } else if (e.getActionCommand().equals("addPatron")) {
+            addPatron();
+        } else if (e.getActionCommand().equals("removePatron")) {
+            // TODO: removePatron();
         } else if (e.getActionCommand().equals("finishAdd")) {
-            addShowToTheatre();
+            addPatronToTheatre();
         }
     }
 
+
+
     //MODIFIES: theatre
-    //EFFECTS: adds the show to the theatre
-    public void addShowToTheatre() {
-        Show show = new Show();
-        String name = showName.getText();
-        if (theatre.containsShowName(name)) {
-            errorMessage();
+    //EFFECTS: adds the patron to the theatre
+    public void addPatronToTheatre() {
+        String name = patronName.getText();
+        String birthday = patronBirthday.getText();
+        if (name == null || birthday == null) {
+            // do nothing //TODO: figure out this
+        }
+        if (theatre.containsPatronName(name)) {
+            errorQuitMessage();
         } else {
-            show.setTitle(name);
-            show.setTicketPrice(Double.parseDouble(showPrice.getText()));
-            show.addDate(showDate.getText());
-            theatre.addNewShow(show);
+            Patron patron = new Patron();
+            patron.setName(name);
+            patron.setBirthday(birthday);
+            theatre.addNewPatron(patron);
         }
         removeEverything();
         pack();
@@ -110,7 +107,6 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
         setResizable(false);
         mainMenu();
 
-        //TODO: add more dates button
         //TODO; make robust - fails rn if no entry
 
     }
@@ -122,7 +118,7 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
         remove(labelPane);
         remove(saveButton);
         remove(finishAdd);
-        remove(showList);
+        remove(patronList);
     }
 
     //EFFECTS: Lets user choose whether to sell a ticket or change/view theatre info
@@ -131,17 +127,17 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
         saveButton.setActionCommand("save");
         saveButton.addActionListener(this);
 
-        addShowButton = new JButton("Add a Show");
-        addShowButton.setActionCommand("addShow");
-        addShowButton.addActionListener(this);
+        addPatronButton = new JButton("Add a Patron");
+        addPatronButton.setActionCommand("addPatron");
+        addPatronButton.addActionListener(this);
 
-        removeShowButton = new JButton("Remove a Show");
-        removeShowButton.setActionCommand("removeShow");
-        removeShowButton.addActionListener(this);
+        removePatronButton = new JButton("Remove a Patron");
+        removePatronButton.setActionCommand("removePatron");
+        removePatronButton.addActionListener(this);
 
         add(saveButton);
-        add(addShowButton);
-        add(removeShowButton);
+        add(addPatronButton);
+        add(removePatronButton);
         remove(loadButton);
         pack();
         setLocationRelativeTo(null);
@@ -156,7 +152,7 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
         try {
             writer.open();
         } catch (FileNotFoundException e) {
-            errorMessage();
+            errorQuitMessage();
         }
         writer.write(theatre);
         writer.close();
@@ -170,98 +166,79 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
         try {
             theatre = reader.read();
         } catch (IOException e) {
-            errorMessage();
+            errorQuitMessage();
         }
     }
 
     //MODIFIES: theatre
-    //EFFECT: lets user add a show to the theatre
-    public void addShow() {
+    //EFFECT: lets user add a patron to the theatre
+    public void addPatron() {
 
-        String allShowNames = "Upcoming Shows: ";
-        for (String showN : theatre.getUpcomingShowNames()) {
-            allShowNames += showN;
-            allShowNames += ", ";
+        String patronNames = "Patrons: ";
+        for (String patronN : theatre.getPatronNames()) {
+            patronNames += patronN;
+            patronNames += ", ";
         }
+        patronList = new JLabel(patronNames);
 
 
+        initializeLablesAndFields();
+        initializePanes();
 
-        showList = new JLabel(allShowNames);
-
-        showNameLabel = new JLabel("Show Name");
-        showPriceLabel = new JLabel("Show Price");
-        addShowDateLabel = new JLabel("Add Show Date");
-
-        finishAdd = new JButton("Done");
-        finishAdd.setActionCommand("finishAdd");
-        finishAdd.addActionListener(this);
-
-        showName = new JFormattedTextField(stringFormatter);
-        showName.setValue("");
-        showName.setColumns(10);
-        //showName.addPropertyChangeListener("name", this);
-
-        showPrice = new JFormattedTextField(amountFormat);
-        showPrice.setValue("");
-        showPrice.setColumns(10);
-        //showPrice.addPropertyChangeListener("price", this);
-
-        showDate = new JFormattedTextField(stringFormatter);
-        showDate.setValue("");
-        showDate.setColumns(10);
-        //showDate.addPropertyChangeListener("data", this);
-
-        showNameLabel.setLabelFor(showName);
-        showPriceLabel.setLabelFor(showPrice);
-        addShowDateLabel.setLabelFor(showDate);
-
-        labelPane = new JPanel(new GridLayout(3,1));
-        labelPane.add(showNameLabel);
-        labelPane.add(showPriceLabel);
-        labelPane.add(addShowDateLabel);
-
-
-        fieldPane = new JPanel(new GridLayout(0,1));
-        fieldPane.add(showName);
-        fieldPane.add(showPrice);
-        fieldPane.add(showDate);
+        patronPane.add(patronList);
 
         add(labelPane, BorderLayout.CENTER);
         add(fieldPane, BorderLayout.LINE_END);
+        add(patronPane, BorderLayout.AFTER_LINE_ENDS);
 
         add(finishAdd);
-        add(showList);
-        remove(addShowButton);
-        remove(removeShowButton);
+        add(patronList);
+        remove(addPatronButton);
+        remove(removePatronButton);
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
         setResizable(false);
     }
 
-//    @Override
-//    public void propertyChange(PropertyChangeEvent evt) {
-//       // Object source = evt.getSource();
-//        //code referece: https://docs.oracle.com/javase/tutorial/uiswing/events/propertychangelistener.html
-//        String propertyName = evt.getPropertyName();
-//        Show show = new Show();
-//        theatre.addNewShow(show);
-//        if (propertyName.equals(showName)) {
-//            String name = showName.getValue().toString();
-//            if (theatre.containsShowName(name)) {
-//                errorMessage();
-//            } else {
-//                show.setTitle(name);
-//            }
-//        } else if (propertyName.equals(showPrice)) {
-//            show.setTicketPrice((Double) showPrice.getValue());
-//        } else if (propertyName.equals(showDate)) {
-//            show.addDate(showDate.getValue().toString());
-//        }
-//    }
+    //EFFECT: initializes labels and fields
+    public void initializeLablesAndFields() {
+        patronNameLabel = new JLabel("Patron Name");
+        patronBirthdayLabel = new JLabel("Patron Birthday (MMDDYY)");
+
+        finishAdd = new JButton("Done");
+        finishAdd.setActionCommand("finishAdd");
+        finishAdd.addActionListener(this);
+
+        patronName = new JFormattedTextField();
+        patronName.setValue("");
+        patronName.setColumns(10);
+
+        patronBirthday = new JFormattedTextField();
+        patronBirthday.setValue("");
+        patronBirthday.setColumns(10);
+
+        patronNameLabel.setLabelFor(patronName);
+        patronBirthdayLabel.setLabelFor(patronBirthday);
+    }
+
+    //EFFECTS: initializes panes
+    public void initializePanes() {
+        labelPane = new JPanel(new GridLayout(0, 1, 2, 10));
+        labelPane.add(patronNameLabel);
+        labelPane.add(patronBirthdayLabel);
+
+        fieldPane = new JPanel(new GridLayout(0,1));
+        fieldPane.add(patronName);
+        fieldPane.add(patronBirthday);
+
+        patronPane = new JPanel(new GridLayout(0,1));
+    }
+
+
 
     //EFFECT:Displays error message
-    public void errorMessage() {
+    public void errorQuitMessage() {
         JLabel error = new JLabel("Error. Let's quit");
         removeAll();
         JPanel labelPane = new JPanel(new GridLayout(0,1));
@@ -274,8 +251,6 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
         System.exit(1);
     }
 
-    //TODO: set up formats
-    //TODO: add more dates
-    // TODO: make method shorter
+    //TODO: make remove patron button
     //TODO: image pop up thing
 }
