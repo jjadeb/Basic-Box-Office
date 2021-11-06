@@ -23,9 +23,15 @@ import java.util.concurrent.TimeUnit;
 // docs.oracle.com/javase/tutorial/uiswing/examples/components/FormattedText
 // FieldDemoProject/src/components/FormattedTextFieldDemo.java
 
+//Class references Oracle icon explanation
+//url: https://docs.oracle.com/javase/tutorial/uiswing/components/icon.html
+
+//Class Represents a Box office where a theatre can keep track of their patrons
 public class BoxOfficeGUI extends JFrame implements ActionListener {
 
     private Theatre theatre;
+
+    //buttons
     private JButton loadButton;
     private JButton saveButton;
     private JButton addPatronButton;
@@ -37,6 +43,8 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
     private JLabel patronNameLabel;
     private JLabel patronBirthdayLabel;
     private JLabel patronList;
+    private JLabel image;
+    private JLabel errorLabel;
 
     //add patron text fields
     private JFormattedTextField patronName;
@@ -48,27 +56,45 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
     JPanel fieldPane;
     JPanel patronPane;
 
+    //Dialogue
+    JDialog imageBox;
+    JDialog error;
 
+
+
+
+    //EFFECTS: Constructor for box office. Creates windows, pop up image, and load button
     public BoxOfficeGUI() {
         super("Box Office");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(700, 300));
+        setPreferredSize(new Dimension(600, 200));
         ((JPanel) getContentPane()).setBorder(new EmptyBorder(13, 13, 13, 13));
         setLayout(new FlowLayout());
         loadButton = new JButton("Load Information");
         loadButton.setActionCommand("load");
         loadButton.addActionListener(this);
 
+        imageBox = new JDialog();
+        imageBox.setPreferredSize(new Dimension(250,250));
+        image = new JLabel(new ImageIcon("data/Drawing.jpeg", "image"));
+        imageBox.add(image);
+        imageBox.setLocationRelativeTo(null);
+        imageBox.toFront();
+
         theatre = new Theatre();
         add(loadButton);
         pack();
+        imageBox.pack();
         setLocationRelativeTo(null);
+        imageBox.setVisible(true);
         setVisible(true);
         setResizable(false);
     }
 
 
+
     @Override
+    //EFFECTS: calls the proper method for each button
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("load")) {
             readIn();
@@ -93,9 +119,9 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
         String name = patronName.getText();
         String birthday = patronBirthday.getText();
         if (name.equals("") || birthday.equals("")) {
-            //do nothing
+            errorGeneral("Error: no input.");
         } else if (theatre.containsPatronName(name)) {
-            errorQuit();
+            errorGeneral("Error: name already in system.");
         } else {
             Patron patron = new Patron();
             patron.setName(name);
@@ -118,9 +144,9 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
         String name = patronName.getText();
         String birthday = patronBirthday.getText();
         if (name.equals("") || birthday.equals("")) {
-            //do nothing
+            errorGeneral("Error: no input.");
         } else if (!theatre.containsPatronName(name)) {
-            errorQuit();
+            errorGeneral("Error: name doesn't exist.");
         } else {
             Patron patron = theatre.getPatron(name, birthday);
             theatre.removePatron(patron);
@@ -143,7 +169,9 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
         remove(patronList);
     }
 
-    //EFFECTS: Lets user choose whether to sell a ticket or change/view theatre info
+
+    //MODIFIES: this
+    //EFFECTS: Lets user choose whether save info, add a patron, or remove one
     public void mainMenu() {
         saveButton = new JButton("Save Information and Quit");
         saveButton.setActionCommand("save");
@@ -165,34 +193,37 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setVisible(true);
         setResizable(false);
+        toFront();
     }
 
 
+
+    //MODIFIES: this
     //EFFECTS: saves theatre data and exits
     public void writeOut() {
         JsonWriter writer = new JsonWriter("./data/theatre");
         try {
             writer.open();
+            writer.write(theatre);
+            writer.close();
+            System.exit(1);
         } catch (FileNotFoundException e) {
-            errorQuit();
+            errorGeneral("File not found. Info not able to be saved.");
         }
-        writer.write(theatre);
-        writer.close();
-        System.exit(1);
     }
 
-    //MODIFIES: theatre
+
     //EFFECTS: reads in theatre data
     public void readIn() {
         JsonReader reader = new JsonReader("./data/theatre");
         try {
             theatre = reader.read();
         } catch (IOException e) {
-            errorQuit();
+            errorGeneral("File not found. Info not able to be loaded.");
         }
     }
 
-    //MODIFIES: theatre
+    //MODIFIES: this
     //EFFECT: lets user add a patron to the theatre
     public void addPatron() {
 
@@ -226,7 +257,7 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
         setResizable(false);
     }
 
-    //MODIFIES: theatre
+    //MODIFIES: this
     //EFFECT: lets user remove a patron to the theatre
     public void removePatron() {
         String patronNames = "Patrons: ";
@@ -247,7 +278,7 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
 
         add(labelPane, BorderLayout.CENTER);
         add(fieldPane, BorderLayout.LINE_END);
-        add(patronPane, BorderLayout.AFTER_LINE_ENDS);
+        add(patronPane, BorderLayout.PAGE_END);
 
         add(finishRemove);
         add(patronList);
@@ -291,13 +322,25 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
 
 
 
-    //EFFECT: Displays error message then quits right away
+    //EFFECT: quits system
     public void errorQuit() {
         System.exit(1);
     }
 
+    //MODIFIES: this
+    //EFFECTS: produces an error message saying there is no input
+    public void errorGeneral(String string) {
+        error = new JDialog();
+        error.setPreferredSize(new Dimension(300,100));
+        errorLabel = new JLabel(string);
+        error.add(errorLabel);
+        error.pack();
+        error.setVisible(true);
+        error.setLocationRelativeTo(null);
+        error.setAlwaysOnTop(true);
+    }
 
-    //TODO: image pop up thing
-    //TODO: make it prettier
-    //TODO: go over requirements again
+
+
+
 }
