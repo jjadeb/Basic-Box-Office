@@ -12,7 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 //Class references code from Phase 3 Description (Swing JLable text change)
 //url: https://stackoverflow.com/questions/6578205/swing-jlabel-text-change-
@@ -23,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 // docs.oracle.com/javase/tutorial/uiswing/examples/components/FormattedText
 // FieldDemoProject/src/components/FormattedTextFieldDemo.java
 
-//Class references Oracle icon explanation
+//Class references code from Oracle icon explanation
 //url: https://docs.oracle.com/javase/tutorial/uiswing/components/icon.html
 
 //Class Represents a Box office where a theatre can keep track of their patrons
@@ -67,7 +66,7 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
     public BoxOfficeGUI() {
         super("Box Office");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(600, 200));
+        setPreferredSize(new Dimension(600, 300));
         ((JPanel) getContentPane()).setBorder(new EmptyBorder(13, 13, 13, 13));
         setLayout(new FlowLayout());
         loadButton = new JButton("Load Information");
@@ -75,11 +74,11 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
         loadButton.addActionListener(this);
 
         imageBox = new JDialog();
-        imageBox.setPreferredSize(new Dimension(250,250));
+        imageBox.setPreferredSize(new Dimension(250,300));
         image = new JLabel(new ImageIcon("data/Drawing.jpeg", "image"));
         imageBox.add(image);
         imageBox.setLocationRelativeTo(null);
-        imageBox.toFront();
+        imageBox.isAlwaysOnTop();
 
         theatre = new Theatre();
         add(loadButton);
@@ -145,8 +144,9 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
         String birthday = patronBirthday.getText();
         if (name.equals("") || birthday.equals("")) {
             errorGeneral("Error: no input.");
-        } else if (!theatre.containsPatronName(name)) {
-            errorGeneral("Error: name doesn't exist.");
+        } else if (!theatre.containsPatronName(name)
+                || theatre.getPatron(name,birthday) ==  null) {
+            errorGeneral("Error: patron doesn't exist.");
         } else {
             Patron patron = theatre.getPatron(name, birthday);
             theatre.removePatron(patron);
@@ -236,19 +236,16 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
 
         initializeLablesAndFields();
         initializePanes();
-
         patronPane.add(patronList);
 
         finishAdd = new JButton("Done");
         finishAdd.setActionCommand("finishAdd");
         finishAdd.addActionListener(this);
 
-        add(labelPane, BorderLayout.CENTER);
-        add(fieldPane, BorderLayout.LINE_END);
-        add(patronPane, BorderLayout.AFTER_LINE_ENDS);
+        addItems();
 
         add(finishAdd);
-        add(patronList);
+
         remove(addPatronButton);
         remove(removePatronButton);
         pack();
@@ -271,23 +268,28 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
         initializePanes();
 
         patronPane.add(patronList);
-
         finishRemove = new JButton("Done");
         finishRemove.setActionCommand("finishRemove");
         finishRemove.addActionListener(this);
 
-        add(labelPane, BorderLayout.CENTER);
-        add(fieldPane, BorderLayout.LINE_END);
-        add(patronPane, BorderLayout.PAGE_END);
+        addItems();
 
         add(finishRemove);
-        add(patronList);
+
         remove(addPatronButton);
         remove(removePatronButton);
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
         setResizable(false);
+    }
+
+    //EFFECTS: adds items to the window
+    private void addItems() {
+        add(labelPane, BorderLayout.CENTER);
+        add(fieldPane, BorderLayout.LINE_END);
+        add(patronPane, BorderLayout.PAGE_END);
+        add(patronList);
     }
 
     //EFFECT: initializes labels and fields
@@ -307,6 +309,7 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
         patronBirthdayLabel.setLabelFor(patronBirthday);
     }
 
+
     //EFFECTS: initializes panes
     public void initializePanes() {
         labelPane = new JPanel(new GridLayout(0, 1, 2, 10));
@@ -321,11 +324,6 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
     }
 
 
-
-    //EFFECT: quits system
-    public void errorQuit() {
-        System.exit(1);
-    }
 
     //MODIFIES: this
     //EFFECTS: produces an error message saying there is no input
