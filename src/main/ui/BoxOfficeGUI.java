@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 //Class references code from Phase 3 Description (Swing JLable text change)
 //url: https://stackoverflow.com/questions/6578205/swing-jlabel-text-change-
@@ -30,6 +31,7 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
     private JButton addPatronButton;
     private JButton removePatronButton;
     private JButton finishAdd;
+    private JButton finishRemove;
 
     //add patron labels (from FormattedTextFieldDemo.java)
     private JLabel patronNameLabel;
@@ -76,12 +78,13 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
         } else if (e.getActionCommand().equals("addPatron")) {
             addPatron();
         } else if (e.getActionCommand().equals("removePatron")) {
-            // TODO: removePatron();
+            removePatron();
         } else if (e.getActionCommand().equals("finishAdd")) {
             addPatronToTheatre();
+        } else if (e.getActionCommand().equals("finishRemove")) {
+            removePatronFromTheatre();
         }
     }
-
 
 
     //MODIFIES: theatre
@@ -89,17 +92,17 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
     public void addPatronToTheatre() {
         String name = patronName.getText();
         String birthday = patronBirthday.getText();
-        if (name == null || birthday == null) {
-            // do nothing //TODO: figure out this
-        }
-        if (theatre.containsPatronName(name)) {
-            errorQuitMessage();
+        if (name.equals("") || birthday.equals("")) {
+            //do nothing
+        } else if (theatre.containsPatronName(name)) {
+            errorQuit();
         } else {
             Patron patron = new Patron();
             patron.setName(name);
             patron.setBirthday(birthday);
             theatre.addNewPatron(patron);
         }
+        remove(finishAdd);
         removeEverything();
         pack();
         setLocationRelativeTo(null);
@@ -107,8 +110,28 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
         setResizable(false);
         mainMenu();
 
-        //TODO; make robust - fails rn if no entry
+    }
 
+    //MODIFIES: theatre
+    //EFFECTS: remove patron from the theatre
+    public void removePatronFromTheatre() {
+        String name = patronName.getText();
+        String birthday = patronBirthday.getText();
+        if (name.equals("") || birthday.equals("")) {
+            //do nothing
+        } else if (!theatre.containsPatronName(name)) {
+            errorQuit();
+        } else {
+            Patron patron = theatre.getPatron(name, birthday);
+            theatre.removePatron(patron);
+        }
+        remove(finishRemove);
+        removeEverything();
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(false);
+        setResizable(false);
+        mainMenu();
     }
 
     //MODIFIES: this
@@ -117,7 +140,6 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
         remove(fieldPane);
         remove(labelPane);
         remove(saveButton);
-        remove(finishAdd);
         remove(patronList);
     }
 
@@ -152,7 +174,7 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
         try {
             writer.open();
         } catch (FileNotFoundException e) {
-            errorQuitMessage();
+            errorQuit();
         }
         writer.write(theatre);
         writer.close();
@@ -166,7 +188,7 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
         try {
             theatre = reader.read();
         } catch (IOException e) {
-            errorQuitMessage();
+            errorQuit();
         }
     }
 
@@ -181,11 +203,14 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
         }
         patronList = new JLabel(patronNames);
 
-
         initializeLablesAndFields();
         initializePanes();
 
         patronPane.add(patronList);
+
+        finishAdd = new JButton("Done");
+        finishAdd.setActionCommand("finishAdd");
+        finishAdd.addActionListener(this);
 
         add(labelPane, BorderLayout.CENTER);
         add(fieldPane, BorderLayout.LINE_END);
@@ -201,14 +226,43 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
         setResizable(false);
     }
 
+    //MODIFIES: theatre
+    //EFFECT: lets user remove a patron to the theatre
+    public void removePatron() {
+        String patronNames = "Patrons: ";
+        for (String patronN : theatre.getPatronNames()) {
+            patronNames += patronN;
+            patronNames += ", ";
+        }
+        patronList = new JLabel(patronNames);
+
+        initializeLablesAndFields();
+        initializePanes();
+
+        patronPane.add(patronList);
+
+        finishRemove = new JButton("Done");
+        finishRemove.setActionCommand("finishRemove");
+        finishRemove.addActionListener(this);
+
+        add(labelPane, BorderLayout.CENTER);
+        add(fieldPane, BorderLayout.LINE_END);
+        add(patronPane, BorderLayout.AFTER_LINE_ENDS);
+
+        add(finishRemove);
+        add(patronList);
+        remove(addPatronButton);
+        remove(removePatronButton);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+        setResizable(false);
+    }
+
     //EFFECT: initializes labels and fields
     public void initializeLablesAndFields() {
         patronNameLabel = new JLabel("Patron Name");
         patronBirthdayLabel = new JLabel("Patron Birthday (MMDDYY)");
-
-        finishAdd = new JButton("Done");
-        finishAdd.setActionCommand("finishAdd");
-        finishAdd.addActionListener(this);
 
         patronName = new JFormattedTextField();
         patronName.setValue("");
@@ -237,20 +291,13 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
 
 
 
-    //EFFECT:Displays error message
-    public void errorQuitMessage() {
-        JLabel error = new JLabel("Error. Let's quit");
-        removeAll();
-        JPanel labelPane = new JPanel(new GridLayout(0,1));
-        labelPane.add(error);
-        add(labelPane, BorderLayout.CENTER);
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
-        setResizable(false);
+    //EFFECT: Displays error message then quits right away
+    public void errorQuit() {
         System.exit(1);
     }
 
-    //TODO: make remove patron button
+
     //TODO: image pop up thing
+    //TODO: make it prettier
+    //TODO: go over requirements again
 }
