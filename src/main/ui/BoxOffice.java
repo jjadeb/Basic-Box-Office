@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.people.Patron;
 import model.shows.Show;
 import model.theatre.Theatre;
@@ -18,6 +20,7 @@ import static java.lang.Integer.parseInt;
 //This is where all the nitty gritty of the user code is
 public class BoxOffice {
 
+    private EventLog el;
     private Scanner scanner;
     private Theatre theatre = new Theatre();
 
@@ -25,6 +28,7 @@ public class BoxOffice {
     public BoxOffice() {
         scanner = new Scanner(System.in);
         readIn();
+        EventLog.getInstance().clear();
         if (theatre.getName().equals("")) {
             setUp();
         }
@@ -58,6 +62,7 @@ public class BoxOffice {
             theatreInformation();
         }  else if (response.equals("3")) {
             writeOut();
+            printEvents();
             System.exit(1);
         } else {
             System.out.println("That wasn't one of the options! Let's see them again.");
@@ -88,6 +93,15 @@ public class BoxOffice {
         writer.write(theatre);
         writer.close();
         System.out.println("Information has been saved!");
+    }
+
+    //EFFECTS: prints out events to the console
+    public void printEvents() {
+        EventLog el = EventLog.getInstance();
+        for (Event next : el) {
+            System.out.println(next.toString());
+            System.out.println("\n");
+        }
     }
 
 
@@ -531,6 +545,7 @@ public class BoxOffice {
         String temp = scanner.nextLine();
         if (temp.equals("1")) {
             writeOut();
+            printEvents();
             System.exit(1);
         } else {
             mainMenu();
@@ -712,6 +727,7 @@ public class BoxOffice {
             System.out.println("That name is taken. Let's quit the program.");
             theatre.removePatron(patron);
             writeOut();
+            printEvents();
             System.exit(2);
             return null;
         } else {

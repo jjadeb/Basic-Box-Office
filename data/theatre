@@ -1,6 +1,21 @@
 {
-    "past": [],
-    "name": "",
-    "patrons": [],
-    "upcoming": []
+    "past": [{
+        "showPatrons": "model.people.PatronList@27bc2616",
+        "ticketPrice": 4,
+        "dates": [{"date": "908721"}],
+        "title": "hi"
+    }],
+    "name": "Massey Theatre",
+    "patrons": [{
+        "birthday": "050402",
+        "patronPastShows": [{"show": "hi"}],
+        "name": "jade",
+        "patronUpcomingShows": [{"show": "Cabaret"}]
+    }],
+    "upcoming": [{
+        "showPatrons": "model.people.PatronList@3941a79c",
+        "ticketPrice": 76,
+        "dates": [{"date": "060721"}],
+        "title": "Cabaret"
+    }]
 }

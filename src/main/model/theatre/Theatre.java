@@ -1,5 +1,7 @@
 package model.theatre;
 
+import model.Event;
+import model.EventLog;
 import model.people.Patron;
 import model.people.PatronList;
 import model.shows.Show;
@@ -23,10 +25,12 @@ public class Theatre {
         patrons = new PatronList();
         shows = new ShowList();
         name = "";
+        EventLog.getInstance().logEvent(new Event("Created a theatre."));
     }
 
     public void setName(String name) {
         this.name = name;
+        EventLog.getInstance().logEvent(new Event("Set the name of the theatre to: " + name));
     }
 
     public String getName() {
@@ -37,6 +41,8 @@ public class Theatre {
     //EFFECTS: adds a show to the upcoming show list
     public void addNewShow(Show show) {
         shows.addNewShow(show);
+        EventLog.getInstance().logEvent(new Event("Added a show "
+                + "to the theatre's upcoming show list."));
     }
 
     //MODIFIES: this
@@ -46,18 +52,24 @@ public class Theatre {
             patron.removeShow(show);
         }
         shows.archive(show);
+        EventLog.getInstance().logEvent(new Event("Removed " + show.getTitle()
+                + " from the theatre's upcoming show list and added it to it's past show list."));
     }
 
     //MODIFIES: this
     //EFFECTS: adds a patron to the list of theatre patrons
     public void addNewPatron(Patron patron) {
         patrons.addNewPatron(patron);
+        EventLog.getInstance().logEvent(new Event("Added a patron"
+                + " to the theatre's patron list."));
     }
 
     //MODIFIES: this
     //EFFECTS: removes a patron from the list of theatre patrons
     public void removePatron(Patron patron) {
         patrons.removePatron(patron);
+        EventLog.getInstance().logEvent(new Event("Removed " + patron.getName()
+                + " from the theatre's patron list."));
     }
 
 
@@ -158,9 +170,12 @@ public class Theatre {
         return shows.onThisDate(date);
     }
 
+    //MODIFIES: this
     //EFFECTS: removes a show from upcoming and past show lists
     public void removeShow(Show show) {
         shows.removeShow(show);
+        EventLog.getInstance().logEvent(new Event("Removed " + show.getTitle()
+                + " from the theatre's show list."));
     }
 
     //EFFECTS: returns true if a name of a patron is already in the system, false otherwise

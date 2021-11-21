@@ -37,3 +37,52 @@ have paid to see
 - As a user, I want to see what shows are on a specific date
 - As a user, I want to be able to save all my box office data
 - As a user, I want to be able to load all my box office data
+
+## Phase 4: Task 2
+
+Sat Nov 20 19:18:18 PST 2021
+Set the name of the theatre to: massey
+
+
+Sat Nov 20 19:18:29 PST 2021
+Created a new show.
+
+
+Sat Nov 20 19:18:29 PST 2021
+Added a show to the theatre's upcoming show list.
+
+
+Sat Nov 20 19:18:34 PST 2021
+Set the title of the show to: cabaret
+
+
+Sat Nov 20 19:18:37 PST 2021
+Added 050402 to cabaret's dates.
+
+
+Sat Nov 20 19:18:44 PST 2021
+Set cabaret's ticket price to 7.0.
+
+
+Sat Nov 20 19:18:51 PST 2021
+Created a new patron.
+
+
+Sat Nov 20 19:18:51 PST 2021
+Added a patron to the theatre's patron list.
+
+
+Sat Nov 20 19:18:53 PST 2021
+Set patron's name to: jade
+
+
+Sat Nov 20 19:18:56 PST 2021
+Set patron's birthday to: 050402
+
+
+Sat Nov 20 19:19:04 PST 2021
+Added cabaret to jade's upcoming show list.
+
+
+Sat Nov 20 19:19:04 PST 2021
+Added jade to cabaret's patron list.

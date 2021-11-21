@@ -1,5 +1,7 @@
 package model.shows;
 
+import model.Event;
+import model.EventLog;
 import model.people.Patron;
 import model.people.PatronList;
 import org.json.JSONArray;
@@ -22,24 +24,30 @@ public class Show {
         dates = new ArrayList<>();
         title = "";
         ticketPrice = 0;
+        EventLog.getInstance().logEvent(new Event("Created a new show."));
     }
 
     //MODIFIES: this
     //EFFECTS: adds a patron to the list of people with tickets to the show
     public void addPatron(Patron patron) {
         patrons.addNewPatron(patron);
+        EventLog.getInstance().logEvent(new Event("Added " + patron.getName()
+                + " to " + title + "'s patron list."));
     }
 
     //MODIFIES: this
     //EFFECTS: removes a patron from the list of people with tickets to the show
     public void removePatron(Patron patron) {
         patrons.removePatron(patron);
+        EventLog.getInstance().logEvent(new Event("Removed " + patron.getName()
+                + " from " + title + "'s patron list."));
     }
 
 
     //REQUIRES: show shouldn't have the same title as another show
     public void setTitle(String title) {
         this.title = title;
+        EventLog.getInstance().logEvent(new Event("Set the title of the show to: " + title));
     }
 
 
@@ -48,6 +56,8 @@ public class Show {
     //EFFECTS: add a date to the show
     public void addDate(String date) {
         dates.add(date);
+        EventLog.getInstance().logEvent(new Event("Added " + date
+                + " to " + title + "'s dates."));
     }
 
     //REQUIRES: each date must be of the form MMDDYY
@@ -55,6 +65,8 @@ public class Show {
     //EFFECTS: removes a date from the show
     public void removeDate(String date) {
         dates.remove(date);
+        EventLog.getInstance().logEvent(new Event("Removed " + date
+                + " from " + title + "."));
     }
 
 
@@ -82,6 +94,8 @@ public class Show {
 
     public void setTicketPrice(double ticketPrice) {
         this.ticketPrice = ticketPrice;
+        EventLog.getInstance().logEvent(new Event("Set " + title + "'s ticket price to "
+                + ticketPrice + "."));
     }
 
     public PatronList getPatrons() {

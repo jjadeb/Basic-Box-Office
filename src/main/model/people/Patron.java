@@ -1,6 +1,8 @@
 package model.people;
 
 
+import model.Event;
+import model.EventLog;
 import model.shows.Show;
 
 import model.shows.ShowList;
@@ -21,12 +23,15 @@ public class Patron {
         myShows = new ShowList();
         name = "";
         birthday = "";
+        EventLog.getInstance().logEvent(new Event("Created a new patron."));
     }
 
     //MODIFIES: this
     // EFFECT: adds a new show to the patrons upcoming show list, can add multiple times to represent multiple tickets
     public void addShow(Show show) {
         myShows.addNewShow(show);
+        EventLog.getInstance().logEvent(new Event("Added " + show.getTitle()
+                + " to " + name + "'s upcoming show list."));
     }
 
 
@@ -34,6 +39,8 @@ public class Patron {
     //EFFECT: removes a show from the patrons upcoming show list and adds it to their past shows
     public void removeShow(Show show) {
         myShows.archive(show);
+        EventLog.getInstance().logEvent(new Event("Removed " + show.getTitle()
+                + " from " + name + "'s upcoming show list and added it to their past shows."));
     }
 
     //EFFECTS: checks to see if the show is in the patron's upcoming show list
@@ -59,10 +66,12 @@ public class Patron {
     //REQUIRES: no patron should have the same name
     public void setName(String name) {
         this.name = name;
+        EventLog.getInstance().logEvent(new Event("Set patron's name to: " + name));
     }
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
+        EventLog.getInstance().logEvent(new Event("Set patron's birthday to: " + birthday));
     }
 
     public String getName() {
