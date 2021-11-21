@@ -20,12 +20,13 @@ import static java.lang.Integer.parseInt;
 //This is where all the nitty gritty of the user code is
 public class BoxOffice {
 
-    private EventLog el;
+
     private Scanner scanner;
-    private Theatre theatre = new Theatre();
+    private Theatre theatre;
 
     //EFFECTS: constructs a box office
     public BoxOffice() {
+        theatre = new Theatre();
         scanner = new Scanner(System.in);
         readIn();
         EventLog.getInstance().clear();

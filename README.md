@@ -86,3 +86,14 @@ Added cabaret to jade's upcoming show list.
 
 Sat Nov 20 19:19:04 PST 2021
 Added jade to cabaret's patron list.
+
+## Phase 4: Task 3
+
+Right now I have a bunch of methods in the theatre class that are 
+just references to methods in the ShowList and PatronList classes.
+One way I would refactor to improve my design is by getting rid of
+those methods and using the getter methods in the ShowList and PatronList 
+classes instead. This will help clean up my code by removing unnecessary 
+methods. This will also help with cohesion, making sure that each class
+is focused on one thing.
+
