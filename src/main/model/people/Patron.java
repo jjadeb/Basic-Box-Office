@@ -11,7 +11,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-//Represent a theatre patron that has signed up for an account with the theatre
+//represent a theatre patron that has signed up for an account with the theatre
 public class Patron {
 
     String name;
