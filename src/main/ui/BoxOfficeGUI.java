@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.people.Patron;
 import model.theatre.Theatre;
 import persistence.JsonReader;
@@ -97,8 +99,10 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("load")) {
             readIn();
+            EventLog.getInstance().clear();
             mainMenu();
         } else if (e.getActionCommand().equals("save")) {
+            printEvents();
             writeOut();
         } else if (e.getActionCommand().equals("addPatron")) {
             addPatron();
@@ -111,6 +115,15 @@ public class BoxOfficeGUI extends JFrame implements ActionListener {
         }
     }
 
+    //EFFECTS: prints out events to the console
+    public void printEvents() {
+        EventLog el = EventLog.getInstance();
+        for (Event next : el) {
+            System.out.println(next.toString());
+            System.out.println("\n");
+        }
+        EventLog.getInstance().clear();
+    }
 
     //MODIFIES: theatre
     //EFFECTS: adds the patron to the theatre
