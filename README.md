@@ -97,3 +97,7 @@ classes instead. This will help clean up my code by removing unnecessary
 methods. This will also help with cohesion, making sure that each class
 is focused on one thing.
 
+In addition, to improve cohesion I would split by BoxOffice class up into
+more classes so that each class has one main role. Right now the box office
+class does too many things.
+
